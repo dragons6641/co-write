@@ -1,0 +1,231 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>자기소개서 4단계</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+
+    <style>
+        .write_table {
+            width: 50%;
+            border: 1px solid black;
+            float: left;
+        }
+        .q_num {
+            width: 100%;
+            height: 50px;
+        }
+        .q_write p {
+            width: 100%;
+            height: 50px;
+        }
+        .a_num {
+            width: 100%;
+            height: 50px;
+        }
+        .a_write p {
+            width: 100%;
+            height: 350px;
+        }
+        .revise_table {
+            width: 50%;
+            border: 1px solid black;
+            float: right;
+        }
+        .r_num {
+            width: 100%;
+            height: 50px;
+        }
+        .r_revise p {
+            width: 100%;
+            height: 450px;
+        }
+        .footer {
+            clear: both;
+        }
+        .buttons {
+            text-align: right;
+        }
+        .evaluate_table {
+            width: 100%;
+            border: 1px solid black;
+        }
+        .evaluate_title {
+            width: 50%;
+            height: 50px;
+        }
+        .e_rating {
+            width: 50%;
+            height: 50px;
+            text-align: right;
+        }
+        .e_comment textarea {
+            width: 100%;
+            height: 450px;
+        }
+    </style>
+</head>
+<body>
+    <h3>고정 상단바 들어갈 위치</h3>
+    <br><br>
+    <h1>4단계 : 첨삭 확인과 평가</h1>
+    <br><br>
+    <table class="write_table">
+        <tr>
+            <td class="write_title"><h1>자기소개서</h1></td>
+        </tr>
+        <tr>
+            <td class="q_num">
+                <h3>1번 문제</h3>
+            </td>
+        <tr>
+            <td class="q_write">
+                <p id="q_write1">1번 문제 input</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="a_num">
+                <h3>1번 답안</h3>
+            </td>
+        </tr>
+        <tr>
+            <td class="a_write">
+                <p id="a_write1">1번 답안 input</p>
+            </td>
+        </tr>
+        <td class="q_num">
+                <h3>2번 문제</h3>
+            </td>
+        <tr>
+            <td class="q_write">
+                <p id="q_write2">2번 문제 input</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="a_num">
+                <h3>2번 답안</h3>
+            </td>
+        </tr>
+        <tr>
+            <td class="a_write">
+                <p id="a_write2">2번 답안 input</p>
+            </td>
+        </tr>
+        <td class="q_num">
+                <h3>3번 문제</h3>
+            </td>
+        <tr>
+            <td class="q_write">
+                <p id="q_write3">3번 문제 input</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="a_num">
+                <h3>3번 답안</h3>
+            </td>
+        </tr>
+        <tr>
+            <td class="a_write">
+                <p id="a_write3">3번 답안 input</p>
+            </td>
+        </tr>
+        <td class="q_num">
+                <h3>4번 문제</h3>
+            </td>
+        <tr>
+            <td class="q_write">
+                <p id="q_write4">4번 문제 input</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="a_num">
+                <h3>4번 답안</h3>
+            </td>
+        </tr>
+        <tr>
+            <td class="a_write">
+                <p id="a_write4">4번 답안 input</p>
+            </td>
+        </tr>
+    </table>
+    <table class="revise_table">
+        <tr>
+            <td class="revise_title"><h1>첨삭</h1></td>
+        </tr>
+        <tr>
+            <td class="r_num">
+                <h3>1번 첨삭</h3>
+            </td>
+        </tr>
+        <tr>
+            <td class="r_revise">
+                <p id="r_revise1">1번 첨삭 input</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="r_num">
+                <h3>2번 첨삭</h3>
+            </td>
+        </tr>
+        <tr>
+            <td class="r_revise">
+                <p id="r_revise2">2번 첨삭 input</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="r_num">
+                <h3>3번 첨삭</h3>
+            </td>
+        </tr>
+        <tr>
+            <td class="r_revise">
+                <p id="r_revise3">3번 첨삭 input</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="r_num">
+                <h3>4번 첨삭</h3>
+            </td>
+        </tr>
+        <tr>
+            <td class="r_revise">
+                <p id="r_revise4">4번 첨삭 input</p>
+            </td>
+        </tr>
+    </table>
+    <p class="footer"><br><br></p>
+    <form action="evaluate_form.jsp" method="post" class="evaluate_form"></form>
+        <table class="evaluate_table">
+            <tr>
+                <td class="evaluate_title"><h1>첨삭 평가</h1></td>
+                <td class="e_rating">
+                    첨삭 평점 : 
+                    <input type="radio" name="e_grade" value="1"> 1점
+                    <input type="radio" name="e_grade" value="2"> 2점
+                    <input type="radio" name="e_grade" value="3"> 3점
+                    <input type="radio" name="e_grade" value="4"> 4점
+                    <input type="radio" name="e_grade" value="5"> 5점
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="e_comment">
+                    <textarea id="e_textarea"></textarea>
+                </td>
+            </tr>
+        </table>
+
+            
+        <p class="buttons">
+            <input type="submit" value="임시저장" class="save_button">
+            <input type="submit" value="제출하기" class="submit_button">
+        </p>
+    </form>
+    <br><br>
+    <h3>절대 하단바 들어갈 위치</h3>
+    <br><br>
+    
+</body>
+</html>
