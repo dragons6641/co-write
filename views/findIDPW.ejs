@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Start Head -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Find ID/PW</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/style.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/modules.css">
+
+	<!-- Canonical URL usage -->
+	<link rel="canonical" href="https://aperitif.io/">
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		var id= '<%= id %>';
+		//document.getElementById("id");
+		//var scr_id = $("#id");
+		if(id==''){
+			//document.all.for_vis_id.style.display="none";
+			$("#for_vis_id").css("display","none");
+		}
+		else{
+			//document.all.for_vis_id.style.display="";
+			$("#for_vis_id").css("display","");
+		}
+	});
+	$(document).ready(function(){
+		var passques= '<%= passques %>';
+		//document.getElementById("id");
+		//var scr_id = $("#id");
+		if(passques==''){
+			//document.all.for_vis_id.style.display="none";
+			$("#for_vis_passques").css("display","none");
+		}
+		else{
+			//document.all.for_vis_id.style.display="";
+			$("#for_vis_passques").css("display","");
+		}
+	});
+
+	var is_right = function(){
+		var usr_passans = $('input[name=passans]').val();
+		var real_passans = '<%= passans %>';
+		if(usr_passans ==''){
+			alert("항목을 채워주세요.");
+		}
+		else if (usr_passans == real_passans){
+			window.location.href = '/auth/changePW';
+		}
+		else{
+			alert("답변이 틀렸습니다.");
+		}
+	}
+	</script>
+	<style>
+	table{
+		margin:auto;
+	}
+	#center-align{
+		text-align:center;
+	}
+	#aaa{
+		padding-top:10px;
+	}
+	</style>
+</head>
+<!-- End Head -->
+
+<body class="default">
+
+<!--
+START MODULE AREA 1: Text | Form
+-->
+<section>
+  <div data-layout="_r">
+		<div id="center-align" data-layout="de6 ec5 ec-n3">
+				<img style="width:300px;height:200px;margin:0px;margin-top:25px;margin-left:10px;" src="images/logo.png" onclick="location.href='/auth/login'">
+		</div>
+    <div id="center-align" data-layout="de10 ec-half">
+      <h3>ID 찾기</h3>
+      <form action="/auth/findID" method="post">
+				<table>
+	        <tr><div class="formRow">
+	          <td><label for="MOD_TEXTFORM_NameField">이름 </label></td><td><input id="MOD_TEXTFORM_NameField" name="username" type="text"></td>
+	        </div></tr>
+	        <tr><div class="formRow">
+	          <td><label for="MOD_TEXTFORM_NameField">e-mail </label></td><td><input id="MOD_TEXTFORM_NameField" name="email" type="email"></td>
+	        </div></tr>
+				</table>
+        <button type="submit" class="btn">ID 찾기</button>
+      </form>
+			<div id="for_vis_id" style="display:none;"> <p>ID: <%= id %></p></div>
+      <br>
+
+
+
+      <h3>PW 찾기</h3>
+      <form action="/auth/findPW" method="post">
+				<table>
+	        <tr><div class="formRow">
+	          <td><label for="MOD_TEXTFORM_NameField">이름 </label></td><td><input id="MOD_TEXTFORM_NameField" name="username" type="text">
+	        </div></tr>
+	        <tr><div class="formRow">
+	          <td><label for="MOD_TEXTFORM_NameField">e-mail </label></td><td><input id="MOD_TEXTFORM_NameField" name="email" type="email">
+	        </div></tr>
+	        <tr><div class="formRow">
+	          <td><label for="MOD_TEXTFORM_NameField">ID </label></td><td><input id="MOD_TEXTFORM_NameField" name="id" type="text">
+	        </div></tr>
+				</table>
+        <button type="submit" class="btn">PW 찾기 질문 보기</button>
+      </form>
+			<div id="for_vis_passques" style="display:none;"> <p>Question: <%= passques %></p>
+				<script>
+					function press(e){
+						if(e.keyCode ==13){
+							window.ansform.submit();
+						}
+					}
+				</script>
+				<div class="formRow"><label for="MOD_TEXTFORM_NameField">Answer </label><input id="MOD_TEXTFORM_NameField" name="passans" type="text"></div>
+				<button class="btn" onclick="is_right()">PW 찾기</button>
+			</div>
+    </div>
+  </div>
+</section>
+<!--
+END MODULE AREA 1: Text | Form
+-->
+
+<script src="assets/js/index.js"></script>
+
+</body>
+
+</html>
