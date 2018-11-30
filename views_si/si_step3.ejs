@@ -66,6 +66,7 @@
 				company_id=3;
 			}
 			document.getElementById('slogan').innerHTML = slogans[company_id];
+			document.getElementById('form_text_id').value = '<%= text_id %>';
 		});
 	</script>
   <style>
@@ -170,6 +171,7 @@ START MODULE AREA 3: Accordian 1
           <p id="slogan"></p>
         </div>
         <form name="revise_form" action="/si/step3" method="post">
+					<input type="hidden" id="form_text_id" name="text_id">
           <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="1">1번 문항</p>
           <div class="AP_accordion_panel" role="tabpanel">
             <section>

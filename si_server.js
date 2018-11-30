@@ -74,7 +74,7 @@ app.post('/si/step2', function(req, res){
 });
 //step 3
 app.get('/si/step3', function(req,res){
-  //내가 partner로 들어있는거 찾아와야함
+  //user_id가 partner로 들어있는 row를 찾아와야함
   var sql = "select * from letter where partner_id=?";
   var params = [user_id];
   conn.query(sql, params, function(err,rows,fields){
@@ -91,25 +91,78 @@ app.get('/si/step3', function(req,res){
       var a3 = rows[0].a3;
       var q4 = rows[0].q4;
       var a4 = rows[0].a4;
-      res.render('si_step3', {companyname:companyname, q1:q1, a1:a1, q2:q2, a2:a2, q3:q3, a3:a3, q4:q4, a4:a4});
+      res.render('si_step3', {text_id:text_id, companyname:companyname, q1:q1, a1:a1, q2:q2, a2:a2, q3:q3, a3:a3, q4:q4, a4:a4});
     });
   });
 });
 app.post('/si/step3', function(req, res){
+  var text_id = req.body.text_id;
+  var r1 = req.body.r1;
+  var r2 = req.body.r2;
+  var r3 = req.body.r3;
+  var r4 = req.body.r4;
+  var sql = "update letter_textbox set r1=?, r2=?, r3=?, r4=? where text_id=?";
+  var params = [r1,r2,r3,r4,text_id];
+  conn.query(sql,params, function(err, rows, fields){
+    sql = "update letter set state=?, isRevised=? where text_id=?";
+    params = [3, 1, text_id];
+    conn.query(sql, params, function(err, rows, fields){
+      res.render('si_revise_waiting',{});
+    });
+  });
+});
 
-
-  res.render('si_revise_waiting',{});
+//step 4
+app.get('/si/step4', function(req,res){
+  //user_id가 user_id로 들어있는 row를 찾아와야함
+  var sql = "select * from letter where user_id=?";
+  var params = [user_id];
+  conn.query(sql, params, function(err,rows,fields){
+    var text_id = rows[0].text_id;
+    var companyname = rows[0].companyname;
+    sql = "select * from letter_textbox where text_id=?";
+    params = [text_id];
+    conn.query(sql, params, function(err,rows, fields){
+      var q1 = rows[0].q1;
+      var a1 = rows[0].a1;
+      var q2 = rows[0].q2;
+      var a2 = rows[0].a2;
+      var q3 = rows[0].q3;
+      var a3 = rows[0].a3;
+      var q4 = rows[0].q4;
+      var a4 = rows[0].a4;
+      var r1 = rows[0].r1;
+      var r2 = rows[0].r2;
+      var r3 = rows[0].r3;
+      var r4 = rows[0].r4;
+      res.render('si_step4', {text_id:text_id, companyname:companyname, q1:q1, a1:a1, q2:q2, a2:a2, q3:q3, a3:a3, q4:q4, a4:a4, r1:r1, r2:r2, r3:r3, r4:r4});
+    });
+  });
+});
+app.post('/si/step4', function(req, res){
+  var text_id = req.body.text_id;
+  var evaluate_score = req.body.evaluate_score;
+  var evaluate_text = req.body.evaluate_text;
+  var sql = "update letter set evaluate_score=?, evaluate_text=?, state=?, isEvaluated=?";
+  var params = [evaluate_score, evaluate_text, 4, 1];
+  conn.query(sql, params, function(err, rows, fields){
+    res.render('si_revise_finish', {});
+  });
 });
 
 
-//step 4
+
 
 //mypage
 app.get('/mypage', function(req, res){
-
   res.render('mypage',{});
-
 });
+
+//report
+app.get('/si/report', function(req, res){
+  res.render('si_report',{});
+});
+
 app.listen(3003, function(){
   console.log('Connected 3003 port!!!');
 });
