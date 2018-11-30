@@ -4,35 +4,35 @@ var MySQLStore = require('express-mysql-session');
 var bodyParser = require('body-parser');
 var cons = require('consolidate');
 var app = express();
-var mysql      = require('mysql');
+var mysql = require('mysql');
 var conn= mysql.createConnection({
-  host     : 'localhost',
+  host     : '54.180.104.7',
   user     : 'root',
-  password : '111111',
-  database : 'o2'
+  password : '1234',
+  database : 'testdb',
+  port:3306
 });
 app.use(session({
   secret: '1q2w3e4r!@QWRasdf', //임의 설정
   resave: false,
   saveUninitialized: true,
   store:new MySQLStore({
-    host: 'localhost',
+    host: '54.180.104.7',
     port:3306,
     user: 'root',
-    password:'111111',
-    database:'o2'
+    password:'1234',
+    database:'testdb'
   })
 }));
 app.use(bodyParser.urlencoded({extended:false}));
 conn.connect();
-app.engine('html', cons.swig)
+app.engine('html', cons.swig);
 app.set('views', './views/');
 app.use('/auth', express.static(__dirname+'/views/'));
 app.set('view engine', 'ejs');
 
 //1. login 구현
 app.get('/auth/login', function(req, res){
-  console.log(__dirname);
   //res.sendFile('views/login.html', {root:__dirname});
   res.render('login', {});
 });
