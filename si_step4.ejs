@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Start Head -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>자기소개서 4단계</title>
+
+	<link rel="stylesheet" href="assets/css/style.min.css">
+	<link rel="stylesheet" href="assets/css/modules.css">
+
+	<!-- Canonical URL usage -->
+	<link rel="canonical" href="https://aperitif.io/">
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:url"                content="https://aperitif.io/" />
+	<meta property="og:title"              content="Aperitif | The web template generator" />
+	<meta property="og:description"        content="Aperitif is a rapid web template generation tool." />
+	<meta property="og:image"              content="https://aperitif.io/img/aperitif-facebook.png" />
+	<meta property="og:image:width"        content="1200" />
+	<meta property="og:image:height"       content="630" />
+
+	<!-- Twitter Cards -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@Aperitif">
+	<meta name="twitter:creator" content="@Aperitif">
+	<meta name="twitter:title" content="Aperitif - The web template generator">
+	<meta name="twitter:description" content="Aperitif is a rapid web template generation tool.">
+	<meta name="twitter:image" content="https://aperitif.io/img/aperitif-card.png">
+
+	<!-- Google Structured Data -->
+	<script type="application/ld+json">
+	{
+	"@context" : "http://schema.org",
+	"@type" : "SoftwareApplication",
+	"name" : "Aperitif",
+	"image" : "https://aperitif.io/img/aperitif-logo.svg",
+	"url" : "https://aperitif.io/",
+	"author" : {
+	  "@type" : "Person",
+	  "name" : "Octavector"
+	},
+	"datePublished" : "2017-MM-DD",
+	"applicationCategory" : "HTML"
+	}
+  </script>
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/si_step2.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var companyname= '<%= companyname %>';
+			var logosrc = "images/"+companyname+"_logo.jpg";
+			document.getElementById('logo').src = logosrc;
+			var company_id=-1;
+			if(companyname=="삼성전자"){
+				company_id=0;
+			}
+			else if(companyname=="현대자동차"){
+				company_id=1;
+			}
+			else if(companyname=="LG전자"){
+				company_id=2;
+			}
+			else if(companyname=="SK하이닉스"){
+				company_id=3;
+			}
+			document.getElementById('slogan').innerHTML = slogans[company_id];
+      document.getElementById('form_text_id').value = '<%= text_id %>';
+    });
+	</script>
+  <style>
+    .MOD_FEATURE_Picture {
+      padding: 10px;
+    }
+    table {
+      border: 1px solid grey;
+      width: 50%;
+    }
+    table th, td {
+      text-align: center;
+    }
+    .button_area {
+      padding: 10px;
+      float: right;
+    }
+    .fixed_width {
+      width: 336px;
+      background: url(http://i.imgur.com/2cOaJ.png);
+      background-attachment: local;
+      background-repeat: no-repeat;
+      background-size: auto 33600px;
+      padding-left: 50px;
+      padding-top: 1px;
+      border-color:#ccc;
+    }
+  </style>
+</head>
+<!-- End Head -->
+
+<body class="default">
+
+<!--
+START MODULE AREA 1: Menu 1
+-->
+<section class="MOD_MENU" data-theme="_bgp">
+  <div data-layout="_r" class="nopadding">
+    <nav class="MOD_MENU_Nav">
+      <p class="MOD_MENU_Title">Menu</p>
+      <svg class="MOD_MENU_Button" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+        <rect width="30" height="6"/>
+        <rect y="24" width="30" height="6"/>
+        <rect y="12" width="30" height="6"/>
+      </svg>
+      <ul class="AP_Menu_List">
+        <li>
+          <a href="#" data-theme="_bgp">Menu Item</a>
+        </li>
+        <li>
+          <a href="#" data-theme="_bgp">Menu Item</a>
+          <ul>
+            <li>
+              <a href="#" data-theme="_bgpd">Sub-Menu Item</a>
+            </li>
+            <li>
+              <a href="#" data-theme="_bgpd">Sub-Menu Item long title</a>
+            </li>
+            <li>
+              <a href="#" data-theme="_bgpd">Sub-Menu Item</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#" data-theme="_bgp">Menu Item</a>
+        </li>
+        <li>
+          <a href="#" data-theme="_bgp">Menu Item</a>
+        </li>
+        <li>
+          <a href="#" data-theme="_bgp">Menu Item</a>
+        </li>
+        <li>
+          <a href="#" data-theme="_bgp">Menu Item</a>
+          <ul>
+            <li>
+              <a href="#" data-theme="_bgpd">Sub-Menu Item</a>
+            </li>
+            <li>
+              <a href="#" data-theme="_bgpd">Sub-Menu Item long title</a>
+            </li>
+            <li>
+              <a href="#" data-theme="_bgpd">Sub-Menu Item</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</section>
+<!--
+END MODULE AREA 1: Menu 1
+-->
+
+<!--
+  START MODULE AREA 2: Page Title 1
+-->
+<section>
+  <div data-layout="_r">
+    <div data-layout="al16">
+      <h1>4단계 : 첨삭 확인과 평가</h1>
+      <p>여기에 4단계 설명 넣겠습니다</p>
+    </div>
+  </div>
+</section>
+<!--
+  END MODULE AREA 2: Page Title 1
+-->
+
+<!--
+START MODULE AREA 3: Accordian 1
+-->
+<section class="MOD_ACCORDION1">
+  <div data-layout="_r">
+    <div data-layout="al16">
+      <div class="AP_accordion" role="tablist">
+        <div class="MOD_ACCORDION1_Intro">
+          <img id="logo" class="MOD_FEATURE_Picture" alt="회사로고">
+          <h2 data-theme="_bb2"><%= companyname %></h2>
+          <p id="slogan"></p>
+        </div>
+        <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="1">1번 문항</p>
+        <div class="AP_accordion_panel" role="tabpanel">
+          <section>
+            <div data-layout="_r">
+              <div data-layout="al16">
+                <h3>1번 문제</h3>
+                <p id="q1"><%= q1 %></p>
+              </div>
+              <div data-layout="de10 ec-half">
+                <h3>1번 답안</h3>
+                <div class="fixed_width">
+                  <p id="a1"><%= a1 %></p>
+                </div>
+              </div>
+              <div data-layout="de10 ec-half">
+                <h3>1번 문항 첨삭</h3>
+                <p id="r1"><%= r1 %></p>
+              </div>
+            </div>
+          </section>
+        </div>
+        <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="2">2번 문항</p>
+        <div class="AP_accordion_panel" role="tabpanel">
+          <section>
+            <div data-layout="_r">
+              <div data-layout="al16">
+                <h3>2번 문제</h3>
+                <p id="q2"><%= q2 %></p>
+              </div>
+              <div data-layout="de10 ec-half">
+                <h3>2번 답안</h3>
+                <div class="fixed_width">
+                  <p id="a2"><%= a2 %></p>
+                </div>
+              </div>
+              <div data-layout="de10 ec-half">
+                <h3>2번 문항 첨삭</h3>
+                <p id="r2"><%= r2 %></p>
+              </div>
+            </div>
+          </section>
+        </div>
+        <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="3">3번 문항</p>
+        <div class="AP_accordion_panel" role="tabpanel">
+          <section>
+            <div data-layout="_r">
+              <div data-layout="al16">
+                <h3>3번 문제</h3>
+                <p id="q3"><%= q3 %></p>
+              </div>
+              <div data-layout="de10 ec-half">
+                <h3>3번 답안</h3>
+                <div class="fixed_width">
+                  <p id="a3"><%= a3 %></p>
+                </div>
+              </div>
+              <div data-layout="de10 ec-half">
+                <h3>3번 문항 첨삭</h3>
+                <p id="r3"><%= r3 %></p>
+              </div>
+            </div>
+          </section>
+        </div>
+        <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="4">4번 문항</p>
+        <div class="AP_accordion_panel" role="tabpanel">
+          <section>
+            <div data-layout="_r">
+              <div data-layout="al16">
+                <h3>4번 문제</h3>
+                <p id="q4"><%= q4 %></p>
+              </div>
+              <div data-layout="de10 ec-half">
+                <h3>4번 답안</h3>
+                <div class="fixed_width">
+                  <p id="a1"><%= a1 %></p>
+                </div>
+              </div>
+              <div data-layout="de10 ec-half">
+                <h3>4번 문항 첨삭</h3>
+                <p id="r4"><%= r4 %></p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--
+END MODULE AREA 3: Accordian 1
+-->
+
+<!--
+  START MODULE AREA 4: Text | Text
+-->
+<!--
+  END MODULE AREA 4: Text | Text
+-->
+
+<!--
+START MODULE AREA 5: Text | Form
+-->
+<section>
+  <div data-layout="_r">
+    <div data-layout="al16">
+      <form name="evaluate_form" action="/si/step4" method="post">
+				<input type="hidden" id="form_text_id" name="text_id">
+        <h3>첨삭 평점</h3>
+        <div class="formRow">
+          <table>
+            <tr>
+              <th><input type="radio" name="evaluate_score" value="1"></th>
+              <th><input type="radio" name="evaluate_score" value="2"></th>
+              <th><input type="radio" name="evaluate_score" value="3"></th>
+              <th><input type="radio" name="evaluate_score" value="4"></th>
+              <th><input type="radio" name="evaluate_score" value="5"></th>
+            </tr>
+            <tr>
+              <td>1점</td>
+              <td>2점</td>
+              <td>3점</td>
+              <td>4점</td>
+              <td>5점</td>
+            </tr>
+          </table>
+        </div>
+        <h3>첨삭 평가</h3>
+        <div class="formRow">
+          <textarea id="evaluate_text" name="evaluate_text" placeholder="첨삭 평가를 입력하세요" class="MOD_TEXTFORM_MsgField"></textarea>
+        </div>
+        <div class="button_area">
+          <button id="report_button" type="button" class="btn" onclick="location.href='/si/report'">신고하기</button>
+          <button id="evaluate_submit" type="submit" class="btn">제출하기</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+<!--
+END MODULE AREA 5: Text | Form
+-->
+
+<script src="assets/js/index.js"></script>
+</body>
+
+</html>
