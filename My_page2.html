@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Aperitif - Custom Template</title>
+	<title>나의 페이지</title>
 
 	<link rel="stylesheet" href="assets/css/style.min.css">
 	<link rel="stylesheet" href="assets/css/modules.css">
@@ -73,9 +73,6 @@ START MODULE AREA 1: Menu 1
 	          <a href="Annotation.html" data-theme="_bgp">첨삭</a>
 	        </li>
 	        <li>
-	          <a href="Posts.html" data-theme="_bgp">게시판</a>
-	        </li>
-	        <li>
 	          <a href="My_page.html" data-theme="_bgp">나의 페이지</a>
 	        </li>
 	      </ul>
@@ -108,26 +105,38 @@ START MODULE AREA 3: Accordian 1
     <div data-layout="al16">
       <div class="AP_accordion" role="tablist">
         <div class="MOD_ACCORDION1_Intro">
-          <h2 data-theme="_bb2">Section Title</h2>
-          <p> 풀이내용이 옵니다. </p>
+          <h3 data-theme="_bb2">아이디123의 풀이</h2>
+					파일 : 성균관대 2017.pdf
+					<style scoped type="text/css">
+					textarea{
+							background: url(http://i.imgur.com/2cOaJ.png);
+					background-attachment: local;
+					background-repeat: no-repeat;
+					background-size: auto 31500px;
+					padding-left: 35px;
+					padding-top: 15px;
+							border-color:#ccc;
+					}
+					</style>
+          <textarea readonly id='mytextarea' cols="100" rows ='10'></textarea>
         </div>
-        <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="0">아이디 1</p>
+        <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="0">아이디 1의 첨삭</p>
         <div class="AP_accordion_panel" role="tabpanel">
           <p>
             첨삭1
         </div>
-        <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="0">아이디2</p>
+        <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="0">아이디 2의 첨삭</p>
         <div class="AP_accordion_panel" role="tabpanel">
           <p>
             첨삭2
           </p>
         </div>
-        <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="0">아이디 3</p>
+        <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="0">아이디 3의 첨삭</p>
         <div class="AP_accordion_panel" role="tabpanel">
           <p>
             첨삭3
         </div>
-        <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="0">아이디 4</p>
+        <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="0">아이디 4의 첨삭</p>
         <div class="AP_accordion_panel" role="tabpanel">
           <p>
             첨삭4
@@ -141,6 +150,15 @@ END MODULE AREA 3: Accordian 1
 -->
 
 <script src="assets/js/index.js"></script>
+<script>
+
+// document.getElementById 함수를 호출합니다.
+var myElem = document.getElementById('mytextarea');
+
+// value 속성을 특정 내용으로 변경합니다.
+myElem.value = '글쓰기 풀이 대학혁신과공유센터에서 성균관대학교 학생들이 성균핵심역량진단 및 학습경험 설문조사를 실시하고 있습니다.\n측정 결과를 토대로 더 나은 교육과정을 제공할 수 있는 발판으로 활용하고자 계획되었습니다.자신의 역량을 진단받고 개인의 강점과 약점을 파악할 수 있는 기회를 제공 받을 수 있으며, 적극적이고 성실한 답변을 통해 우리 학교의 교육 내용과 질을 향상 시킬 수 있습니다. 한걸음 더 나아간 성균관대학교의 미래를 그리신다면, 지금 바로 참여해주^^1. 진단 대상: 성균관대학교 2018년 1학기 학부재학생 1-4학년(2018년 2학기 복학생, 대학원생은 제외)\n2. 진단 기감: 2018. 10.04(목) ~2018. 11.23(금)\n3. 참여 방법:* 개인 PC를 통한 온라인 응시로 교내 GLS 접속 후 [신청/자격관리 ☞ 학습경험및성균핵심역량진단 메뉴] 선택 후, 성균핵심역량진단과 학습경험 두 가지 설문 조사 모두 응시* 한 번의 로그인으로 모든 문항을 평가해야 하는 것은 아니며, 중간저장 후 다시 로그인하여 계속 진행할 수 있습니다. 다만, 모든 문항에 답변을 하고 저장을 하셔야만 완료가 됩니다.* 서베이 몽키 링크: https://ko.surveymonkey.com/r/HDWMVPH (<- 클릭) 에 접속해서도 가능* 진단 시간: 각 20분 이내4. 진단 영역:* 성균핵심역량(SCCA) : 성균인이 갖추어야 하는 6대 핵심역량(소통, 인문, 리더, 학문, 글로벌, 창의)* 학습경험: 수업에서의 사고기능, 학습태도와 참여도, 수업 만족도, 교수와의 상호작용, 학습 스터디 및 자기계발 활동, 학생 간 교류 등5. 진단 혜택- 개인별 핵심역량 진단평가 결과 제공 v- ★★ 성균핵심역량진단(SCCA) , 학습경험 조사 모두 참여한 학생에게 우선 추첨하여 지급(각 검사별 5000원 * 600매) ★★. 관련 문의: 성균관대학교 대학교육혁신센터 petal87@skku.edu 02-740-1674';
+
+</script>
 </body>
 
 </html>
