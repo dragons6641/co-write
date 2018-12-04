@@ -296,6 +296,7 @@ textarea {
   height: 12em;
   font-size: 1em;
   font-family: sans-serif;
+  resize: none;
 }
 
 /* Page Title Background */

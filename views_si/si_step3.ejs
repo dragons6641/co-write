@@ -46,7 +46,7 @@
 	}
   </script>
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="js/si_step2.js"></script>
+  <script type="text/javascript" src="js/si_step3.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			var companyname= '<%= companyname %>';
@@ -67,7 +67,7 @@
 			}
 			document.getElementById('slogan').innerHTML = slogans[company_id];
 			document.getElementById('form_text_id').value = '<%= text_id %>';
-		});
+    });
 	</script>
   <style>
     .MOD_FEATURE_Picture {
@@ -77,11 +77,29 @@
       padding: 10px;
       float: right;
     }
+    .fixed_width {
+      width: 336px;
+      background: url(http://i.imgur.com/2cOaJ.png);
+      background-attachment: local;
+      background-repeat: no-repeat;
+      background-size: auto 33600px;
+      padding-left: 50px;
+      padding-top: 1px;
+      border-color:#ccc;
+    }
+    .num_label {
+      width: 200px;
+      padding: 10px;
+    }
+    .MOD_TEXTFORM_NumField {
+      width: 100px;
+      padding: 10px;
+    }
   </style>
 </head>
 <!-- End Head -->
 
-<body class="default">
+<body class="default" onload="Init()">
 
 <!--
 START MODULE AREA 1: Menu 1
@@ -97,45 +115,24 @@ START MODULE AREA 1: Menu 1
       </svg>
       <ul class="AP_Menu_List">
         <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
+          <a href="#" data-theme="_bgp">마이 페이지</a>
         </li>
         <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
+          <a href="#" data-theme="_bgp">자기소개서</a>
           <ul>
             <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item</a>
+              <a href="#" data-theme="_bgpd">삼성전자</a>
             </li>
             <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item long title</a>
+              <a href="#" data-theme="_bgpd">현대자동차</a>
             </li>
             <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item</a>
+              <a href="#" data-theme="_bgpd">LG전자</a>
+            </li>
+            <li>
+              <a href="#" data-theme="_bgpd">SK하이닉스</a>
             </li>
           </ul>
-        </li>
-        <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
-        </li>
-        <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
-        </li>
-        <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
-        </li>
-        <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
-          <ul>
-            <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item</a>
-            </li>
-            <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item long title</a>
-            </li>
-            <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item</a>
-            </li>
-          </ul>
-        </li>
       </ul>
     </nav>
   </div>
@@ -151,6 +148,27 @@ END MODULE AREA 1: Menu 1
   <div data-layout="_r">
     <div data-layout="al16">
       <h1>3단계 : 자기소개서 첨삭</h1>
+      <p>상대방의 자기소개서를 읽어본 후 성의 있게 첨삭해 주세요.</p>
+      <br><br>
+      <h3><첨삭 방법></h3>
+      <p>
+        1. 각 문항을 클릭하면 상대방이 작성한 문제와 답안을 확인할 수 있습니다. <br>
+        <br>
+        2. 문제별로 첨삭 내용을 입력할 수 있습니다. <br>
+        첨삭 내용은 100자 이상 4000자 이하로 작성 가능합니다. <br>
+        또한 실시간으로 현재 첨삭 분량이 적절한지를 체크할 수 있습니다. <br>
+        &nbsp; (1) 현재 글자 수가 100자 미만일 경우 : "글자 수 미달" 이라는 메세지가 표시됩니다. <br>
+        &nbsp; (2) 현재 글자 수가 4000자 초과일 경우 : "글자 수 초과" 라는 메세지가 표시됩니다. <br>
+        &nbsp; (3) 이외의 경우 : "글자 수 적정" 이라는 메세지가 표시됩니다. <br>
+        <br>
+        3. 상대방이 작성한 답안 왼쪽에 줄 번호가 표시됩니다. <br>
+        특정 내용을 첨삭할 때 먼저 줄 번호를 언급하고 첨삭 내용을 작성하는 것을 권장해 드립니다. <br>
+        <br>
+        4. 모든 문항의 첨삭 내용을 작성하면 하단 오른쪽의 "제출하기" 버튼을 눌러 첨삭 내용을 제출합니다. <br>
+        글자 수 조건을 만족하지 않는 첨삭이 있을 경우 제출이 불가능하다는 점 유의해 주시기 바랍니다. <br>
+        제출을 완료하면 상대방의 첨삭이 끝난 후 서로의 첨삭 내용을 확인할 수 있습니다. <br>
+        <br>
+      </p>
     </div>
   </div>
 </section>
@@ -170,22 +188,37 @@ START MODULE AREA 3: Accordian 1
           <h2 data-theme="_bb2"><%= companyname %></h2>
           <p id="slogan"></p>
         </div>
-        <form name="revise_form" action="/si/step3" method="post">
-					<input type="hidden" id="form_text_id" name="text_id">
+        <form name="revise_form" action="/si/step3" method="post" id="rf">
+					<input type="hidden" id="form_text_id" name="tid">
           <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="1">1번 문항</p>
           <div class="AP_accordion_panel" role="tabpanel">
             <section>
               <div data-layout="_r">
-                <div data-layout="de6 ec5 ec-n3">
+                <div data-layout="al16">
                   <h3>1번 문제</h3>
-                  <p id="q1"> <%= q1 %></p>
+                  <p id="q1"><%= q1 %></p>
+                </div>
+                <div data-layout="de10 ec-half">
                   <h3>1번 답안</h3>
-                  <p id="a1"> <%= a1 %></p>
+                  <div class="fixed_width">
+                    <p id="a1"><%= a1 %></p>
+                  </div>
                 </div>
                 <div data-layout="de10 ec-half">
                   <h3>1번 문항 첨삭</h3>
                   <div class="formRow">
-                    <textarea id="r1" name="r1" placeholder="첨삭 내용을 입력하세요" class="MOD_TEXTFORM_MsgField"></textarea>
+                    <div data-layout="de10 ec-half">
+                      <label for="MOD_TEXTFORM_NumField" class="num_label">현재 글자 수</label>
+                    </div>
+                    <div data-layout="de10 ec-half">
+                      <input id="cur_r1" placeholder="현재 글자 수" value="0" type="number" class="MOD_TEXTFORM_NumField" readonly required>
+                    </div>
+                  </div>
+                  <div class="formRow">
+                    <label for="MOD_TEXTFORM_NumField" class="num_label"><div id="message_r1">글자 수 체크</div></label>
+                  </div>
+                  <div class="formRow">
+                    <textarea id="r1" name="r1" placeholder="첨삭 내용을 입력하세요" class="autosize" onkeydown="resize(this)" onkeyup="resize(this); CheckStrLength(1);" onchange="CheckStrLength(1)"></textarea>
                   </div>
                 </div>
               </div>
@@ -193,64 +226,114 @@ START MODULE AREA 3: Accordian 1
           </div>
           <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="2">2번 문항</p>
           <div class="AP_accordion_panel" role="tabpanel">
-              <section>
-                  <div data-layout="_r">
-                    <div data-layout="de6 ec5 ec-n3">
-                      <h3>2번 문제</h3>
-                      <p id="q2"><%= q2 %></p>
-                      <h3>2번 답안</h3>
-                      <p id="a2"><%= a2 %></p>
+            <section>
+              <div data-layout="_r">
+                <div data-layout="al16">
+                  <h3>2번 문제</h3>
+                  <p id="q2"><%= q2 %></p>
+                </div>
+                <div data-layout="de10 ec-half">
+                  <h3>2번 답안</h3>
+                  <div class="fixed_width">
+                    <p id="a2"><%= a2 %></p>
+                  </div>
+                </div>
+                <div data-layout="de10 ec-half">
+                  <h3>2번 문항 첨삭</h3>
+                  <div class="formRow">
+                    <div data-layout="de10 ec-half">
+                      <label for="MOD_TEXTFORM_NumField" class="num_label">현재 글자 수</label>
                     </div>
                     <div data-layout="de10 ec-half">
-                      <h3>2번 문항 첨삭</h3>
-                      <div class="formRow">
-                        <textarea id="r2" name="r2" placeholder="첨삭 내용을 입력하세요" class="MOD_TEXTFORM_MsgField"></textarea>
-                      </div>
+                      <input id="cur_r2" placeholder="현재 글자 수" value="0" type="number" class="MOD_TEXTFORM_NumField" readonly required>
                     </div>
                   </div>
-                </section>
+                  <div class="formRow">
+                    <label for="MOD_TEXTFORM_NumField" class="num_label"><div id="message_r2">글자 수 체크</div></label>
+                  </div>
+                  <div class="formRow">
+                    <textarea id="r2" name="r2" placeholder="첨삭 내용을 입력하세요" class="autosize" onkeydown="resize(this)" onkeyup="resize(this); CheckStrLength(2);" onchange="CheckStrLength(2)"></textarea>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
           <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="3">3번 문항</p>
           <div class="AP_accordion_panel" role="tabpanel">
-              <section>
-                  <div data-layout="_r">
-                    <div data-layout="de6 ec5 ec-n3">
-                      <h3>3번 문제</h3>
-                      <p id="q3"><%= q3 %></p>
-                      <h3>3번 답안</h3>
-                      <p id="a3"><%= a3 %></p>
+            <section>
+              <div data-layout="_r">
+                <div data-layout="al16">
+                  <h3>3번 문제</h3>
+                  <p id="q3"><%= q3 %></p>
+                </div>
+                <div data-layout="de10 ec-half">
+                  <h3>3번 답안</h3>
+                  <div class="fixed_width">
+                    <p id="a3"><%= a3 %></p>
+                  </div>
+                </div>
+                <div data-layout="de10 ec-half">
+                  <h3>3번 문항 첨삭</h3>
+                  <div class="formRow">
+                    <div data-layout="de10 ec-half">
+                      <label for="MOD_TEXTFORM_NumField" class="num_label">현재 글자 수</label>
                     </div>
                     <div data-layout="de10 ec-half">
-                      <h3>3번 문항 첨삭</h3>
-                      <div class="formRow">
-                        <textarea id="r3" name="r3" placeholder="첨삭 내용을 입력하세요" class="MOD_TEXTFORM_MsgField"></textarea>
-                      </div>
+                      <input id="cur_r3" placeholder="현재 글자 수" value="0" type="number" class="MOD_TEXTFORM_NumField" readonly required>
                     </div>
                   </div>
-                </section>
+                  <div class="formRow">
+                    <label for="MOD_TEXTFORM_NumField" class="num_label"><div id="message_r3">글자 수 체크</div></label>
+                  </div>
+                  <div class="formRow">
+                    <textarea id="r3" name="r3" placeholder="첨삭 내용을 입력하세요" class="autosize" onkeydown="resize(this)" onkeyup="resize(this); CheckStrLength(3);" onchange="CheckStrLength(3)"></textarea>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
           <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="4">4번 문항</p>
           <div class="AP_accordion_panel" role="tabpanel">
-              <section>
-                  <div data-layout="_r">
-                    <div data-layout="de6 ec5 ec-n3">
-                      <h3>4번 문제</h3>
-                      <p id="q4"><%= q4 %></p>
-                      <h3>4번 답안</h3>
-                      <p id="a4"><%= a4 %></p>
+            <section>
+              <div data-layout="_r">
+                <div data-layout="al16">
+                  <h3>4번 문제</h3>
+                  <p id="q4"><%= q4 %></p>
+                </div>
+                <div data-layout="de10 ec-half">
+                  <h3>4번 답안</h3>
+                  <div class="fixed_width">
+                    <p id="a4"><%= a4 %></p>
+                  </div>
+                </div>
+                <div data-layout="de10 ec-half">
+                  <h3>4번 문항 첨삭</h3>
+                  <div class="formRow">
+                    <div data-layout="de10 ec-half">
+                      <label for="MOD_TEXTFORM_NumField" class="num_label">현재 글자 수</label>
                     </div>
                     <div data-layout="de10 ec-half">
-                      <h3>4번 문항 첨삭</h3>
-                      <div class="formRow">
-                        <textarea id="r4" name="r4" placeholder="첨삭 내용을 입력하세요" class="MOD_TEXTFORM_MsgField"></textarea>
-                      </div>
+                      <input id="cur_r4" placeholder="현재 글자 수" value="0" type="number" class="MOD_TEXTFORM_NumField" readonly required>
                     </div>
                   </div>
-                </section>
+                  <div class="formRow">
+                    <label for="MOD_TEXTFORM_NumField" class="num_label"><div id="message_r4">글자 수 체크</div></label>
+                  </div>
+                  <div class="formRow">
+                    <textarea id="r4" name="r4" placeholder="첨삭 내용을 입력하세요" class="autosize" onkeydown="resize(this)" onkeyup="resize(this); CheckStrLength(4);" onchange="CheckStrLength(4)"></textarea>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
           <br/><br/>
-          <div class="button_area">
-            <button id="revise_submit" type="submit" class="btn">제출하기</button>
+          <div data-layout="al16">
+            <div data-layout="de10 ec-half">
+              <label for="MOD_TEXTFORM_NumField" class="num_label"><div id="message_revise">제출 조건 체크</div></label>
+            </div>
+            <div data-layout="de10 ec-half" class="button_area">
+              <button id="revise_submit" type="button" class="btn" onclick="CheckPossible()">제출하기</button>
+            </div>
           </div>
         </form>
       </div>

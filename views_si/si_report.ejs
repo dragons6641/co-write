@@ -45,15 +45,24 @@
 	"applicationCategory" : "HTML"
 	}
   </script>
+  <script type="text/javascript" src="js/si_report.js"></script>
   <style>
     .button_area {
       float: right;
+    }
+    .num_label {
+      width: 200px;
+      padding: 10px;
+    }
+    .MOD_TEXTFORM_NumField {
+      width: 100px;
+      padding: 10px;
     }
   </style>
 </head>
 <!-- End Head -->
 
-<body class="default">
+<body class="default" onload="Init()">
 
 <!--
 START MODULE AREA 1: Menu 1
@@ -69,45 +78,24 @@ START MODULE AREA 1: Menu 1
       </svg>
       <ul class="AP_Menu_List">
         <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
+          <a href="#" data-theme="_bgp">마이 페이지</a>
         </li>
         <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
+          <a href="#" data-theme="_bgp">자기소개서</a>
           <ul>
             <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item</a>
+              <a href="#" data-theme="_bgpd">삼성전자</a>
             </li>
             <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item long title</a>
+              <a href="#" data-theme="_bgpd">현대자동차</a>
             </li>
             <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item</a>
+              <a href="#" data-theme="_bgpd">LG전자</a>
+            </li>
+            <li>
+              <a href="#" data-theme="_bgpd">SK하이닉스</a>
             </li>
           </ul>
-        </li>
-        <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
-        </li>
-        <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
-        </li>
-        <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
-        </li>
-        <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
-          <ul>
-            <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item</a>
-            </li>
-            <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item long title</a>
-            </li>
-            <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item</a>
-            </li>
-          </ul>
-        </li>
       </ul>
     </nav>
   </div>
@@ -123,6 +111,7 @@ END MODULE AREA 1: Menu 1
   <div data-layout="_r">
     <div data-layout="al16">
       <h1>신고하기</h1>
+      <p>신고 내용을 입력해 주세요. 신고 내용은 10자 이상 4000자 이하로 입력 가능합니다.</p>
     </div>
   </div>
 </section>
@@ -136,18 +125,23 @@ START MODULE AREA 3: Text | Form
 <section>
   <div data-layout="_r">
     <div data-layout="al16">
-      <form name="report_form" action="/report" method="post">
-        <h3>신고 사유</h3>
+      <form name="report_form" action="/report" method="post" id="rep_f">
+        <h3>신고 내용</h3>
         <div class="formRow">
-          <input id="report_reason" placeholder="신고 사유를 입력하세요" type="text" class="MOD_TEXTFORM_NameField">
+          <div data-layout="de10 ec-half">
+            <label for="MOD_TEXTFORM_NumField" class="num_label">현재 글자 수</label>
+            <input id="cur_report" placeholder="현재 글자 수" value="0" type="number" class="MOD_TEXTFORM_NumField" readonly required>
+          </div>
+          <div data-layout="de10 ec-half">
+            <label for="MOD_TEXTFORM_NumField" class="num_label"><div id="message_report">제출 조건 체크</div></label>
+          </div>
         </div>
-        <h3>상세 내용</h3>
         <div class="formRow">
-          <textarea id="report_detail" placeholder="상세 내용을 입력하세요" class="MOD_TEXTFORM_MsgField"></textarea>
+          <textarea id="report_detail" placeholder="상세 내용을 입력하세요" class="autosize" onkeydown="resize(this)" onkeyup="resize(this); CheckStrLength();" onchange="CheckStrLength()"></textarea>
         </div>
         <br/><br/>
         <div class="button_area">
-          <button id="report_submit" type="submit" class="btn" onclick="location.href='si_report_finish.html'">제출하기</button>
+          <button id="report_submit" type="button" class="btn" onclick="CheckPossible()">제출하기</button>
         </div>
       </form>
     </div>

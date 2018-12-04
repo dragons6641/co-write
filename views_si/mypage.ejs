@@ -46,9 +46,6 @@
 	}
 	</script>
   <style>
-  #item{
-    margin:10px 0px;
-  }
   #process{
     border:1px dotted;
     margin:0px 3px;
@@ -60,6 +57,9 @@
     padding:2px;
     background-color: orange;
   }
+	p{
+		margin:20px 10px;
+	}
   </style>
 </head>
 <!-- End Head -->
@@ -134,29 +134,55 @@ END MODULE AREA 1: Menu 1
   <div data-layout="_r">
     <div data-layout="al16">
       <h1>업로드한 자기소개서</h1>
-      <div id="item">
-        <span> 기업 이름 | </span>
-        <span id="inprocess"> 기업 선택</span>
-        <span id="process"> 자소서 업로드</span>
-        <span id="process"> 첨삭 하기</span>
-        <span id="process"> 첨삭 보기 및 평가</span>
-      </div>
-      <div id="item">
-        <span> 기업 이름 | </span>
-        <span id="process"> 기업 선택</span>
-        <span id="process"> 자소서 업로드</span>
-        <span id="inprocess"> 첨삭 하기</span>
-        <span id="process"> 첨삭 보기 및 평가</span>
-      </div>
-      <div id="item">
-        <span> 기업 이름 | </span>
-        <span id="process"> 기업 선택</span>
-        <span id="process"> 자소서 업로드</span>
-        <span id="process"> 첨삭 하기</span>
-        <span id="inprocess"> 첨삭 보기 및 평가</span>
-      </div>
+			<script>
+			if ('<%=row_length%>'=='0'){
+				document.write("<p>작성한 자기소개서가 없습니다.</p>");
+			}
+			else{
+				var com_names = '<%= com_names %>'.split(",");
+				var states = '<%= states %>'.split(",");
+				var i;
+				document.write("<table cellspacing='15px'>");
+				for(i=0;i<com_names.length;i++){
+					document.write("<tr><div id='item'>");
+					document.write("<th><span>"+ com_names[i]+"</span></th><th>|</th>");
+					if(states[i]==1){
+						document.write("<th><a href='/si/match_waiting' id='inprocess'> 자소서 업로드 </a></th>");
+					}
+					else{
+						document.write("<th><span id='process'> 자소서 업로드 </span></th>");
+					}
+					if(states[i]==2){
+						document.write("<th><a href='/si/step3?companyname="+com_names[i]+"' id='inprocess'> 매칭 완료 </a></th>");//step3
+					}
+					else{
+						document.write("<th><span id='process'> 매칭 완료 </span></th>");
+					}
+					if(states[i]==3){
+						document.write("<th><a href='/si/revise_waiting' id='inprocess'> 첨삭 하기</a></th>");
+					}
+					else{
+						document.write("<th><span id='process'> 첨삭 하기</span></th>");
+					}
+					if(states[i]==4){
+						document.write("<th><a href='/si/step4?companyname="+com_names[i]+"' id='inprocess'> 첨삭 완료</a></th>");//step4
+					}
+					else{
+						document.write("<th><span id='process'> 첨삭 완료</span></th>");
+					}
+					if(states[i]==5){
+						document.write("<th><a href='/si/revise_finish?companyname="+com_names[i]+"' id='inprocess'> 프로세스 완료</a></th>");//finish
+					}
+					else{
+						document.write("<th><span id='process'> 프로세스 완료</span></th>");
+					}
+					document.write("</div></tr>");
+				}
+				document.write("</table>");
+			}
+			</script>
       <br>
-      <button type="button" onclick="location.href='startnew.html'">새로 쓰기 </button>
+      <button type="button" onclick="location.href='/si/step1'">새로 쓰기 </button>
 			<a href='/auth/logout'> logout
 			</div>
 
