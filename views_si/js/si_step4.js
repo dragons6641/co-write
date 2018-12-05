@@ -49,6 +49,8 @@ function CheckPossible()
         if (check)
         {
             document.getElementById("eval_f").submit();
+
+            return true;
         }
     }
     else

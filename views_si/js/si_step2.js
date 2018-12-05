@@ -140,6 +140,8 @@ function CheckPossible()
     if (check)
     {
       document.getElementById("wf").submit();
+
+      return true;
     }
   }
   else

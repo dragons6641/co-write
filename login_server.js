@@ -60,10 +60,8 @@ app.post('/auth/login', function(req, res){
       else{
         var user_id = rows[0].user_id;
         var username = rows[0].username;
-        var id = rows[0].id;
         req.session.user_id = user_id;
         req.session.username = username;
-        req.session.id = id;
         req.session.save(function(){
           res.redirect('/si/mypage');
         });
@@ -204,7 +202,7 @@ app.get('/si/mypage', function(req, res){
         com_names[i]=rows[i].companyname;
         states[i]=rows[i].state;
       }
-      res.render('mypage',{user_id:user_id, username:username, row_length:rows.length, com_names:com_names, states:states});
+      res.render('mypage',{username:username, row_length:rows.length, com_names:com_names, states:states});
     });
   }
   else{
@@ -216,19 +214,17 @@ app.get('/si/mypage', function(req, res){
 
 //step 1
 app.get('/si/step1', function(req, res){
-  var user_id = req.session.user_id;
   var username = req.session.username;
 
-  res.render('si_step1', {user_id:user_id, username:username});
+  res.render('si_step1', {username:username});
 });
 
 //step 2
 app.get('/si/step2', function(req, res){
-  var user_id = req.session.user_id;
   var username = req.session.username;
   var companyname = req.query.companyname;
 
-  res.render('si_step2', {user_id:user_id, username:username, companyname:companyname});
+  res.render('si_step2', {username:username, companyname:companyname});
 });
 app.post('/si/step2', function(req, res){
   var companyname = req.body.comname;
@@ -301,7 +297,7 @@ app.get('/si/step3', function(req,res){
       var a3 = rows[0].a3;
       var q4 = rows[0].q4;
       var a4 = rows[0].a4;
-      res.render('si_step3', {user_id:user_id, username:username, text_id:text_id, companyname:companyname, q1:q1, a1:a1, q2:q2, a2:a2, q3:q3, a3:a3, q4:q4, a4:a4});
+      res.render('si_step3', {username:username, text_id:text_id, companyname:companyname, q1:q1, a1:a1, q2:q2, a2:a2, q3:q3, a3:a3, q4:q4, a4:a4});
     });
   });
 });
@@ -371,7 +367,7 @@ app.get('/si/step4', function(req,res){
       var r2 = rows[0].r2;
       var r3 = rows[0].r3;
       var r4 = rows[0].r4;
-      res.render('si_step4', {user_id:user_id, username:username, text_id:text_id, companyname:companyname, q1:q1, a1:a1, q2:q2, a2:a2, q3:q3, a3:a3, q4:q4, a4:a4, r1:r1, r2:r2, r3:r3, r4:r4});
+      res.render('si_step4', {username:username, text_id:text_id, companyname:companyname, q1:q1, a1:a1, q2:q2, a2:a2, q3:q3, a3:a3, q4:q4, a4:a4, r1:r1, r2:r2, r3:r3, r4:r4});
     });
   });
 });
@@ -385,7 +381,7 @@ app.post('/si/step4', function(req, res){
     sql ="select companyname from letter where text_id=?";
     params=[text_id];
     conn.query(sql, params, function(err, rows, fields){
-      res.ridirect('/si/revise_finish?companyname='+rows[0].companyname);
+      res.redirect('/si/revise_finish?companyname='+rows[0].companyname);
     });
   });
 });
@@ -425,15 +421,14 @@ app.get('/si/revise_finish', function(req, res){
       var r2 = rows[0].r2;
       var r3 = rows[0].r3;
       var r4 = rows[0].r4;
-      res.render('si_revise_finish', {user_id:user_id, username:username, text_id:text_id, companyname:companyname, q1:q1, a1:a1, q2:q2, a2:a2, q3:q3, a3:a3, q4:q4, a4:a4, r1:r1, r2:r2, r3:r3, r4:r4});
+      res.render('si_revise_finish', {username:username, text_id:text_id, companyname:companyname, q1:q1, a1:a1, q2:q2, a2:a2, q3:q3, a3:a3, q4:q4, a4:a4, r1:r1, r2:r2, r3:r3, r4:r4});
     });
   });
 });
 //report
 app.get('/si/report', function(req, res){
-  var user_id = req.session.user_id;
   var username = req.session.username;
-  res.render('si_report',{user_id:user_id, username:username});
+  res.render('si_report',{username:username});
 });
 app.post('/si/report', function(req, res){
   var contents = req.body.contents;
@@ -452,7 +447,7 @@ app.post('/si/report', function(req, res){
         sql = "insert into report (?,?,?)";
         params = [id, rows[0].id, contents];
         conn.query(sql, params, function(err, rows, fields){
-          res.redirect('/si/report_finish');
+          res.redirect('/si/revise_finish');
         });
       });
     });

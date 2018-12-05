@@ -43,7 +43,11 @@ function CheckPossible()
 
         if (check)
         {
+            alert("신고가 접수되었습니다.");
+            
             document.getElementById("rep_f").submit();
+            
+            return true;
         }
     }
     else

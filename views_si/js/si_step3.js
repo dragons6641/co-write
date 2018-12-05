@@ -110,6 +110,8 @@ function CheckPossible()
         if (check)
         {
             document.getElementById("rf").submit();
+
+            return true;
         }
     }
     else
