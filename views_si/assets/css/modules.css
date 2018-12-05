@@ -380,7 +380,7 @@ textarea {
 
 .MOD_MENU_Nav {
   width: 100%;
-  position: relative;
+  position: fixed;
 }
 .MOD_MENU_Nav > ul {
   padding: 0;

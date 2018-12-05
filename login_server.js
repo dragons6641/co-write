@@ -51,7 +51,7 @@ app.post('/auth/login', function(req, res){
     }
     else{
       if(rows.length!=1){//로그인 실패
-        res.send(`<script type="text/javascript"> alert("ID 혹은 PW가 틀립니다.");history.back(); </script>`);
+        res.send(`<script type="text/javascript"> alert("아이디 또는 비밀번호가 올바르지 않습니다.");history.back(); </script>`);
       }
       else{
         var user_id = rows[0].user_id;
@@ -90,7 +90,7 @@ app.post('/auth/signup', function(req, res){
     res.send(`<script type="text/javascript"> alert("모든 항목을 채워주세요.");history.back(); </script>`);
   }
   if(password!=pwc){
-    res.send(`<script type="text/javascript"> alert("PW와 PW확인이 같지 않습니다.");history.back(); </script>`);
+    res.send(`<script type="text/javascript"> alert("새 비밀번호와 비밀번호 확인이 같지 않습니다.");history.back(); </script>`);
   }
   else{
     var sql ='insert into members(id, password, username, email, passques, passans) values(?, ?, ?, ?, ?, ?)';
@@ -98,7 +98,7 @@ app.post('/auth/signup', function(req, res){
     conn.query(sql,params, function (err, rows, fields) {
       if (err){
         if(err.errno==1062){
-          res.send(`<script type="text/javascript"> alert("이미 존재하는 ID 입니다."); history.back(); </script>`);
+          res.send(`<script type="text/javascript"> alert("이미 존재하는 아이디입니다."); history.back(); </script>`);
         }
       }
       else{
@@ -171,13 +171,13 @@ app.post('/auth/changePW', function(req, res){
     res.send(`<script type="text/javascript"> alert("모든 항목을 채워주세요.");history.back(); </script>`);
   }
   else if(newpassword!=newpasswordc){
-    res.send(`<script type="text/javascript"> alert("PW와 PW확인이 같지 않습니다.");history.back(); </script>`);
+    res.send(`<script type="text/javascript"> alert("새 비밀번호와 비밀번호 확인이 같지 않습니다.");history.back(); </script>`);
   }
   else{
     var sql = 'update members set password=? where id=?';
     var params = [newpassword, id];
     conn.query(sql, params, function(err, rows, fields){
-      res.send(`<script type="text/javascript"> alert("PW가 성공적으로 변경되었습니다."); location.href='/auth/login'; </script>`);
+      res.send(`<script type="text/javascript"> alert("비밀번호가 성공적으로 변경되었습니다."); location.href='/auth/login'; </script>`);
     });
   }
 });
@@ -185,6 +185,7 @@ app.post('/auth/changePW', function(req, res){
 app.get('/si/mypage', function(req, res){
   if(req.session.user_id){
     var user_id = req.session.user_id;
+    var username = req.session.username;
     var sql = 'select companyname, state from letter where user_id=?';
     var params=[user_id];
     conn.query(sql, params, function(err, rows, fields){
@@ -195,7 +196,7 @@ app.get('/si/mypage', function(req, res){
         com_names[i]=rows[i].companyname;
         states[i]=rows[i].state;
       }
-      res.render('mypage',{row_length:rows.length, com_names:com_names, states:states});
+      res.render('mypage',{user_id:user_id, username:username, row_length:rows.length, com_names:com_names, states:states});
     });
   }
   else{
@@ -207,13 +208,19 @@ app.get('/si/mypage', function(req, res){
 
 //step 1
 app.get('/si/step1', function(req, res){
-  res.render('si_step1', {});
+  var user_id = req.session.user_id;
+  var username = req.session.username;
+
+  res.render('si_step1', {user_id:user_id, username:username});
 });
 
 //step 2
 app.get('/si/step2', function(req, res){
+  var user_id = req.session.user_id;
+  var username = req.session.username;
   var companyname = req.query.companyname;
-  res.render('si_step2', {companyname:companyname});
+
+  res.render('si_step2', {user_id:user_id, username:username, companyname:companyname});
 });
 app.post('/si/step2', function(req, res){
   var companyname = req.body.comname;
@@ -268,8 +275,9 @@ app.post('/si/step2', function(req, res){
 //step 3
 app.get('/si/step3', function(req,res){
   //user_id가 partner로 들어있는 row를 찾아와야함
-  var companyname = req.query.companyname;
   var user_id = req.session.user_id;
+  var username = req.session.username;
+  var companyname = req.query.companyname;
   var sql = "select * from letter where partner_id=?";
   var params = [user_id];
   conn.query(sql, params, function(err,rows,fields){
@@ -285,7 +293,7 @@ app.get('/si/step3', function(req,res){
       var a3 = rows[0].a3;
       var q4 = rows[0].q4;
       var a4 = rows[0].a4;
-      res.render('si_step3', {text_id:text_id, companyname:companyname, q1:q1, a1:a1, q2:q2, a2:a2, q3:q3, a3:a3, q4:q4, a4:a4});
+      res.render('si_step3', {user_id:user_id, username:username, text_id:text_id, companyname:companyname, q1:q1, a1:a1, q2:q2, a2:a2, q3:q3, a3:a3, q4:q4, a4:a4});
     });
   });
 });
@@ -332,8 +340,9 @@ app.post('/si/step3', function(req, res){
 //step 4
 app.get('/si/step4', function(req,res){
   //user_id가 user_id로 들어있는 row를 찾아와야함
-  var companyname = req.query.companyname;
   var user_id = req.session.user_id;
+  var username = req.session.username;
+  var companyname = req.query.companyname;
   var sql = "select * from letter where user_id=?";
   var params = [user_id];
   conn.query(sql, params, function(err,rows,fields){
@@ -353,7 +362,7 @@ app.get('/si/step4', function(req,res){
       var r2 = rows[0].r2;
       var r3 = rows[0].r3;
       var r4 = rows[0].r4;
-      res.render('si_step4', {text_id:text_id, companyname:companyname, q1:q1, a1:a1, q2:q2, a2:a2, q3:q3, a3:a3, q4:q4, a4:a4, r1:r1, r2:r2, r3:r3, r4:r4});
+      res.render('si_step4', {user_id:user_id, username:username, text_id:text_id, companyname:companyname, q1:q1, a1:a1, q2:q2, a2:a2, q3:q3, a3:a3, q4:q4, a4:a4, r1:r1, r2:r2, r3:r3, r4:r4});
     });
   });
 });
@@ -382,10 +391,12 @@ app.get('/si/match_waiting', function(req, res){
 app.get('/si/revise_waiting', function(req, res){
   res.render('si_revise_waiting',{});
 });
+//revise_finish
 app.get('/si/revise_finish', function(req, res){
   //user_id가 user_id로 들어있는 row를 찾아와야함
-  var companyname = req.query.companyname;
   var user_id = req.session.user_id;
+  var username = req.session.username;
+  var companyname = req.query.companyname;
   var sql = "select * from letter where user_id=?";
   var params = [user_id];
   conn.query(sql, params, function(err,rows,fields){
@@ -405,13 +416,16 @@ app.get('/si/revise_finish', function(req, res){
       var r2 = rows[0].r2;
       var r3 = rows[0].r3;
       var r4 = rows[0].r4;
-      res.render('si_revise_finish', {text_id:text_id, companyname:companyname, q1:q1, a1:a1, q2:q2, a2:a2, q3:q3, a3:a3, q4:q4, a4:a4, r1:r1, r2:r2, r3:r3, r4:r4});
+      res.render('si_revise_finish', {user_id:user_id, username:username, text_id:text_id, companyname:companyname, q1:q1, a1:a1, q2:q2, a2:a2, q3:q3, a3:a3, q4:q4, a4:a4, r1:r1, r2:r2, r3:r3, r4:r4});
     });
   });
 });
 //report
 app.get('/si/report', function(req, res){
-  res.render('si_report',{});
+  var user_id = req.session.user_id;
+  var username = req.session.username;
+
+  res.render('si_report',{user_id:user_id, username:username});
 });
 
 

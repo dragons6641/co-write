@@ -67,7 +67,15 @@
 			}
 			document.getElementById('slogan').innerHTML = slogans[company_id];
     });
-	</script>
+  </script>
+  <style>
+    .session_view {
+      float: right;
+    }
+    .session_view th {
+      padding: 5px;
+    }
+  </style>
 </head>
 <!-- End Head -->
 
@@ -78,56 +86,39 @@ START MODULE AREA 1: Menu 1
 -->
 <section class="MOD_MENU" data-theme="_bgp">
   <div data-layout="_r" class="nopadding">
-    <nav class="MOD_MENU_Nav">
-      <p class="MOD_MENU_Title">Menu</p>
-      <svg class="MOD_MENU_Button" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
-        <rect width="30" height="6"/>
-        <rect y="24" width="30" height="6"/>
-        <rect y="12" width="30" height="6"/>
-      </svg>
-      <ul class="AP_Menu_List">
-        <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
-        </li>
-        <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
-          <ul>
-            <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item</a>
-            </li>
-            <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item long title</a>
-            </li>
-            <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
-        </li>
-        <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
-        </li>
-        <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
-        </li>
-        <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
-          <ul>
-            <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item</a>
-            </li>
-            <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item long title</a>
-            </li>
-            <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
+    <div data-layout="de10 ec-half">
+      <nav class="MOD_MENU_Nav">
+        <p class="MOD_MENU_Title">Menu</p>
+        <svg class="MOD_MENU_Button" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+          <rect width="30" height="6"/>
+          <rect y="24" width="30" height="6"/>
+          <rect y="12" width="30" height="6"/>
+        </svg>
+        <ul class="AP_Menu_List">
+          <li>
+            <a href="/si/mypage" data-theme="_bgp">마이 페이지</a>
+          </li>
+          <li>
+            <a href="Main.html">논술 첨삭으로</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div data-layout="de10 ec-half">
+      <nav class="MOD_MENU_Nav">
+        <p class="MOD_MENU_Title">Menu</p>
+        <svg class="MOD_MENU_Button" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+          <rect width="30" height="6"/>
+          <rect y="24" width="30" height="6"/>
+          <rect y="12" width="30" height="6"/>
+        </svg>
+        <table class="session_view">
+          <th><%= user_id %></th>
+          <th><%= username %></th>
+          <th><button id="logout_button" type="button" class="btn" onclick="location.href='/auth/logout'">로그아웃</button></th>
+        </table>
+      </nav>
+    </div>
   </div>
 </section>
 <!--
@@ -143,7 +134,12 @@ START MODULE AREA 2: Box Message 1
   <div class="MOD_BOXMESSAGE1_Message" data-theme="_bo1">
     <h2>모든 첨삭 과정이 완료되었습니다.</h2>
     <p>Co-Write는 회원님의 합격을 응원합니다!</p>
-    <a href="/si/mypage" class="btn">마이 페이지로 돌아가기</a>
+    <div data-layout="de10 ec-half">
+      <a href="#move" class="btn">첨삭 내용 확인하기</a>
+    </div>
+    <div data-layout="de10 ec-half">
+      <a href="/si/mypage" class="btn">마이 페이지로 돌아가기</a>
+    </div>
   </div>
 
 
@@ -157,7 +153,7 @@ START MODULE AREA 3: Accordian 1
 -->
 <section class="MOD_ACCORDION1">
   <div data-layout="_r">
-    <h3>첨삭 내용</h3>
+    <h3 name="move">첨삭 내용</h3>
     <div data-layout="al16">
       <div class="AP_accordion" role="tablist">
         <div class="MOD_ACCORDION1_Intro">

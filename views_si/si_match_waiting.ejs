@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>1:1 매칭 대기화면</title>
+	<title>1:1 매칭 대기 중</title>
 
 	<link rel="stylesheet" href="assets/css/style.min.css">
 	<link rel="stylesheet" href="assets/css/modules.css">
@@ -51,67 +51,6 @@
 <body class="default">
 
 <!--
-START MODULE AREA 1: Menu 1
--->
-<section class="MOD_MENU" data-theme="_bgp">
-  <div data-layout="_r" class="nopadding">
-    <nav class="MOD_MENU_Nav">
-      <p class="MOD_MENU_Title">Menu</p>
-      <svg class="MOD_MENU_Button" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
-        <rect width="30" height="6"/>
-        <rect y="24" width="30" height="6"/>
-        <rect y="12" width="30" height="6"/>
-      </svg>
-      <ul class="AP_Menu_List">
-        <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
-        </li>
-        <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
-          <ul>
-            <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item</a>
-            </li>
-            <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item long title</a>
-            </li>
-            <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
-        </li>
-        <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
-        </li>
-        <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
-        </li>
-        <li>
-          <a href="#" data-theme="_bgp">Menu Item</a>
-          <ul>
-            <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item</a>
-            </li>
-            <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item long title</a>
-            </li>
-            <li>
-              <a href="#" data-theme="_bgpd">Sub-Menu Item</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </div>
-</section>
-<!--
-END MODULE AREA 1: Menu 1
--->
-
-<!--
 START MODULE AREA 2: Box Message 1
 -->
 <section class="MOD_BOXMESSAGE1" style="background-image:url(https://unsplash.it/1400/?random)">
@@ -120,8 +59,12 @@ START MODULE AREA 2: Box Message 1
   <div class="MOD_BOXMESSAGE1_Message" data-theme="_bo1">
     <h2>1:1 매칭 대기중입니다.</h2>
     <p>빠른 첨삭이 이루어질 수 있도록 최선을 다하겠습니다.</p>
-    <a href="javascript:history.back();" class="btn">이전 페이지로 돌아가기</a>
-		<a href="/si/mypage" class="btn">마이 페이지로 돌아가기</a>
+    <div data-layout="de10 ec-half">
+      <a href="javascript:history.back();" class="btn">이전 페이지로 돌아가기</a>
+    </div>
+    <div data-layout="de10 ec-half">
+      <a href="/si/mypage" class="btn">마이 페이지로 돌아가기</a>
+    </div>
   </div>
 
 
