@@ -464,6 +464,21 @@ app.get('/si/report_finish', function(req, res){
 });
 
 
+app.get('/admin/admin_page', function(req, res){
+  var sql = "select * from report";
+  conn.query(sql, function(err, rows, fields){
+    var arr_user_id=new Array();
+    var arr_partner_id=new Array();
+    var arr_contents=new Array();
+    var i;
+    for(i=0;i<rows.length;i++){
+      arr_user_id[i] = rows[i].user_id;
+      arr_partner_id[i] = rows[i].partner_id;
+      arr_contents[i] = rows[i].contents;
+    }
+    res.render('admin_page', {row_length:rows.length, arr_user_id:arr_user_id, arr_partner_id:arr_partner_id, arr_contents:arr_contents});
+  });
+});
 
 
 

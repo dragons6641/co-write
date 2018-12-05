@@ -132,15 +132,27 @@ END MODULE AREA 1: Menu 1
 <section>
   <div data-layout="_r">
     <div data-layout="al16">
-      <table border="1px solid black">
+      <table border="1px solid black" style="border-collapse: collapse;">
         <tr>
-          <th>신고 접수 번호</th>
           <th>신고한 사용자 id</th>
           <th>신고당한 사용자 id</th>
           <th>신고 내용</th>
         </tr>
 				<script>
-					
+				if ('<%=row_length%>'=='0'){
+					document.write("<p>작성한 자기소개서가 없습니다.</p>");
+				}
+				else{
+					var arr_user_id = '<%= arr_user_id%>'.split(",");
+					var arr_partner_id = '<%=arr_partner_id%>'.split(",");
+					var arr_contents = '<%=arr_contents%>'.split(",");
+					var i;
+					for(i=0;i<arr_user_id.length;i++){
+						document.write("<tr><th>"+arr_user_id[i]+"</th>");
+						document.write("<th>"+arr_partner_id[i]+"</th>");
+						document.write("<th>"+arr_contents[i]+"</th></tr>");
+					}
+				}
 				</script>
       </table>
     </div>
