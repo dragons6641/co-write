@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Start Head -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>신고 페이지</title>
+
+	<link rel="stylesheet" href="assets/css/style.min.css">
+	<link rel="stylesheet" href="assets/css/modules.css">
+
+	<!-- Canonical URL usage -->
+	<link rel="canonical" href="https://aperitif.io/">
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:url"                content="https://aperitif.io/" />
+	<meta property="og:title"              content="Aperitif | The web template generator" />
+	<meta property="og:description"        content="Aperitif is a rapid web template generation tool." />
+	<meta property="og:image"              content="https://aperitif.io/img/aperitif-facebook.png" />
+	<meta property="og:image:width"        content="1200" />
+	<meta property="og:image:height"       content="630" />
+
+	<!-- Twitter Cards -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@Aperitif">
+	<meta name="twitter:creator" content="@Aperitif">
+	<meta name="twitter:title" content="Aperitif - The web template generator">
+	<meta name="twitter:description" content="Aperitif is a rapid web template generation tool.">
+	<meta name="twitter:image" content="https://aperitif.io/img/aperitif-card.png">
+
+	<!-- Google Structured Data -->
+	<script type="application/ld+json">
+	{
+	"@context" : "http://schema.org",
+	"@type" : "SoftwareApplication",
+	"name" : "Aperitif",
+	"image" : "https://aperitif.io/img/aperitif-logo.svg",
+	"url" : "https://aperitif.io/",
+	"author" : {
+	  "@type" : "Person",
+	  "name" : "Octavector"
+	},
+	"datePublished" : "2017-MM-DD",
+	"applicationCategory" : "HTML"
+	}
+  </script>
+  <script type="text/javascript" src="js/si_report.js"></script>
+  <style>
+    .button_area {
+      float: right;
+    }
+    .num_label {
+      width: 200px;
+      padding: 10px;
+    }
+    .MOD_TEXTFORM_NumField {
+      width: 100px;
+      padding: 10px;
+    }
+    .session_view {
+      float: right;
+    }
+    .session_view th {
+      padding: 5px;
+    }
+  </style>
+</head>
+<!-- End Head -->
+
+<body class="default" onload="Init()">
+
+<!--
+START MODULE AREA 1: Menu 1
+-->
+<section class="MOD_MENU" data-theme="_bgp">
+  <div data-layout="_r" class="nopadding">
+    <div data-layout="de10 ec-half">
+      <nav class="MOD_MENU_Nav">
+        <p class="MOD_MENU_Title">Menu</p>
+        <svg class="MOD_MENU_Button" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+          <rect width="30" height="6"/>
+          <rect y="24" width="30" height="6"/>
+          <rect y="12" width="30" height="6"/>
+        </svg>
+        <ul class="AP_Menu_List">
+          <li>
+            <a href="/si/mypage" data-theme="_bgp">마이 페이지</a>
+          </li>
+          <li>
+            <a href="Main.html">논술 첨삭으로</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div data-layout="de10 ec-half">
+      <nav class="MOD_MENU_Nav">
+        <p class="MOD_MENU_Title">Menu</p>
+        <svg class="MOD_MENU_Button" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+          <rect width="30" height="6"/>
+          <rect y="24" width="30" height="6"/>
+          <rect y="12" width="30" height="6"/>
+        </svg>
+        <table class="session_view">
+          <th><%= user_id %></th>
+          <th><%= username %></th>
+          <th><button id="logout_button" type="button" class="btn" onclick="location.href='/auth/logout'">로그아웃</button></th>
+        </table>
+      </nav>
+    </div>
+  </div>
+</section>
+<!--
+END MODULE AREA 1: Menu 1
+-->
+
+<!--
+  START MODULE AREA 2: Page Title 1
+-->
+<section>
+  <div data-layout="_r">
+    <div data-layout="al16">
+      <h1>신고하기</h1>
+      <p>신고 내용을 입력해 주세요. 신고 내용은 10자 이상 4000자 이하로 입력 가능합니다.</p>
+    </div>
+  </div>
+</section>
+<!--
+  END MODULE AREA 2: Page Title 1
+-->
+
+<!--
+START MODULE AREA 3: Text | Form
+-->
+<section>
+  <div data-layout="_r">
+    <div data-layout="al16">
+      <form name="report_form" action="/si/report" method="post" id="rep_f">
+        <h3>신고 내용</h3>
+        <div class="formRow">
+          <div data-layout="de10 ec-half">
+            <label for="MOD_TEXTFORM_NumField" class="num_label">현재 글자 수</label>
+            <input id="cur_report" placeholder="현재 글자 수" value="0" type="number" class="MOD_TEXTFORM_NumField" readonly required>
+          </div>
+          <div data-layout="de10 ec-half">
+            <label for="MOD_TEXTFORM_NumField" class="num_label"><div id="message_report">제출 조건 체크</div></label>
+          </div>
+        </div>
+        <div class="formRow">
+          <textarea id="report_detail" name="contents" placeholder="상세 내용을 입력하세요" class="autosize" onkeydown="resize(this)" onkeyup="resize(this); CheckStrLength();" onchange="CheckStrLength()"></textarea>
+        </div>
+        <br/><br/>
+        <div class="button_area">
+          <button id="report_submit" type="button" class="btn" onclick="CheckPossible()">제출하기</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+<!--
+END MODULE AREA 3: Text | Form
+-->
+
+<script src="assets/js/index.js"></script>
+</body>
+
+</html>

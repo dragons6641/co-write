@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Start Head -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>마이 페이지</title>
+
+	<link rel="stylesheet" href="assets/css/style.min.css">
+	<link rel="stylesheet" href="assets/css/modules.css">
+
+	<!-- Canonical URL usage -->
+	<link rel="canonical" href="https://aperitif.io/">
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:url"                content="https://aperitif.io/" />
+	<meta property="og:title"              content="Aperitif | The web template generator" />
+	<meta property="og:description"        content="Aperitif is a rapid web template generation tool." />
+	<meta property="og:image"              content="https://aperitif.io/img/aperitif-facebook.png" />
+	<meta property="og:image:width"        content="1200" />
+	<meta property="og:image:height"       content="630" />
+
+	<!-- Twitter Cards -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@Aperitif">
+	<meta name="twitter:creator" content="@Aperitif">
+	<meta name="twitter:title" content="Aperitif - The web template generator">
+	<meta name="twitter:description" content="Aperitif is a rapid web template generation tool.">
+	<meta name="twitter:image" content="https://aperitif.io/img/aperitif-card.png">
+
+	<!-- Google Structured Data -->
+	<script type="application/ld+json">
+	{
+	"@context" : "http://schema.org",
+	"@type" : "SoftwareApplication",
+	"name" : "Aperitif",
+	"image" : "https://aperitif.io/img/aperitif-logo.svg",
+	"url" : "https://aperitif.io/",
+	"author" : {
+	  "@type" : "Person",
+	  "name" : "Octavector"
+	},
+	"datePublished" : "2017-MM-DD",
+	"applicationCategory" : "HTML"
+	}
+	</script>
+  <style>
+  #process{
+    border:1px dotted;
+    margin:0px 3px;
+    padding:2px;
+  }
+  #inprocess{
+    border:2px solid;
+    margin:0px 3px;
+    padding:2px;
+    background-color: orange;
+  }
+	p{
+		margin:20px 10px;
+	}
+	.session_view {
+		float: right;
+	}
+	.session_view th {
+		padding: 5px;
+	}
+  </style>
+</head>
+<!-- End Head -->
+
+<body class="default">
+
+<!--
+START MODULE AREA 1: Menu 1
+-->
+<section class="MOD_MENU" data-theme="_bgp">
+  <div data-layout="_r" class="nopadding">
+    <div data-layout="de10 ec-half">
+      <nav class="MOD_MENU_Nav">
+        <p class="MOD_MENU_Title">Menu</p>
+        <svg class="MOD_MENU_Button" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+          <rect width="30" height="6"/>
+          <rect y="24" width="30" height="6"/>
+          <rect y="12" width="30" height="6"/>
+        </svg>
+        <ul class="AP_Menu_List">
+          <li>
+            <a href="/si/mypage" data-theme="_bgp">마이 페이지</a>
+          </li>
+          <li>
+            <a href="Main.html">논술 첨삭으로</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div data-layout="de10 ec-half">
+      <nav class="MOD_MENU_Nav">
+        <p class="MOD_MENU_Title">Menu</p>
+        <svg class="MOD_MENU_Button" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+          <rect width="30" height="6"/>
+          <rect y="24" width="30" height="6"/>
+          <rect y="12" width="30" height="6"/>
+        </svg>
+        <table class="session_view">
+          <th><%= user_id %></th>
+          <th><%= username %></th>
+          <th><button id="logout_button" type="button" class="btn" onclick="location.href='/auth/logout'">로그아웃</button></th>
+        </table>
+      </nav>
+    </div>
+  </div>
+</section>
+<!--
+END MODULE AREA 1: Menu 1
+-->
+
+<!--
+  START MODULE AREA 2: Page Title 1
+-->
+<section>
+  <div data-layout="_r">
+    <div data-layout="al16">
+      <h1>작성한 자기소개서 목록</h1>
+			<script>
+			if ('<%=row_length%>'=='0'){
+				document.write("<p>작성한 자기소개서가 없습니다.</p>");
+			}
+			else{
+				var com_names = '<%= com_names %>'.split(",");
+				var states = '<%= states %>'.split(",");
+				var i;
+				document.write("<table cellspacing='15px'>");
+				for(i=0;i<com_names.length;i++){
+					document.write("<tr><div id='item'>");
+					document.write("<th><span>"+ com_names[i]+"</span></th><th>|</th>");
+					if(states[i]==1){
+						document.write("<th><a href='/si/match_waiting' id='inprocess'> 매칭 대기중 </a></th>");
+					}
+					else{
+						document.write("<th><span id='process'> 매칭 대기중 </span></th>");
+					}
+					if(states[i]==2){
+						document.write("<th><a href='/si/step3?companyname="+com_names[i]+"' id='inprocess'> 첨삭 하기 </a></th>");//step3
+					}
+					else{
+						document.write("<th><span id='process'> 첨삭 하기 </span></th>");
+					}
+					if(states[i]==3){
+						document.write("<th><a href='/si/revise_waiting' id='inprocess'> 첨삭 대기중</a></th>");
+					}
+					else{
+						document.write("<th><span id='process'> 첨삭 대기중</span></th>");
+					}
+					if(states[i]==4){
+						document.write("<th><a href='/si/step4?companyname="+com_names[i]+"' id='inprocess'> 첨삭 보기 및 평가</a></th>");//step4
+					}
+					else{
+						document.write("<th><span id='process'> 첨삭 보기 및 평가</span></th>");
+					}
+					if(states[i]==5){
+						document.write("<th><a href='/si/revise_finish?companyname="+com_names[i]+"' id='inprocess'> 프로세스 완료</a></th>");//finish
+					}
+					else{
+						document.write("<th><span id='process'> 프로세스 완료</span></th>");
+					}
+					document.write("</div></tr>");
+				}
+				document.write("</table>");
+			}
+			</script>
+      <br>
+      <button type="button" onclick="location.href='/si/step1'">새로운 자기소개서 작성</button>
+			<button type="button" onclick="location.href='/auth/logout'">로그아웃</button>
+			</div>
+
+  </div>
+</section>
+<!--
+  END MODULE AREA 2: Page Title 1
+-->
+
+<script src="assets/js/index.js"></script>
+</body>
+
+</html>
