@@ -29,6 +29,8 @@ router.post('/login', function(req, res){
         else{
           var user_id = rows[0].user_id;
           var username = rows[0].username;
+          var point = rows[0].point;
+          req.session.point = point;
           req.session.user_id = user_id;
           req.session.username = username;
           req.session.save(function(){
