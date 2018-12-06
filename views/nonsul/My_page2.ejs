@@ -74,7 +74,14 @@ START MODULE AREA 1: Menu 1
 	        </li>
 	        <li>
 	          <a href="My_page" data-theme="_bgp">나의 페이지</a>
-	        </li>
+					</li>
+					<li><pre>									</pre></li>
+				<li>
+					<a>님 환영합니다.</a>
+				</li>
+				<li>
+					<button id="logout_button" type="button" class="btn" onclick="location.href='/auth/logout'">로그아웃</button>
+				</li>
 	      </ul>
 	    </nav>
 	  </div>
@@ -122,27 +129,24 @@ START MODULE AREA 3: Accordian 1
 					<h4>문제 1번</h4>
 	        <textarea readonly id='mytextarea' cols="100" rows ='10'></textarea>
         </div>
-        <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="0">아이디 1의 첨삭</p>
-        <div class="AP_accordion_panel" role="tabpanel">
-          <p>
-            첨삭1
-        </div>
-        <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="0">아이디 2의 첨삭</p>
-        <div class="AP_accordion_panel" role="tabpanel">
-          <p>
-            첨삭2
-          </p>
-        </div>
-        <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="0">아이디 3의 첨삭</p>
-        <div class="AP_accordion_panel" role="tabpanel">
-          <p>
-            첨삭3
-        </div>
-        <p class="AP_accordion_tab" role="tab" data-theme="_bgp" tabindex="0">아이디 4의 첨삭</p>
-        <div class="AP_accordion_panel" role="tabpanel">
-          <p>
-            첨삭4
-        </div>
+        <section>
+					<div data-layout="_r">
+						<div data-layout="al16">
+							<h3>1번 문제</h3>
+							<p>wow</p>
+						</div>
+						<div data-layout="de10 ec-half">
+							<h3>1번 답안</h3>
+							<div class="fixed_width">
+								<p>yea</p>
+							</div>
+						</div>
+						<div data-layout="de10 ec-half">
+							<h3>1번 문항 첨삭</h3>
+							<p>hou</p>
+						</div>
+					</div>
+				</section>
       </div>
     </div>
   </div>

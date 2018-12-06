@@ -45,6 +45,19 @@
 	"applicationCategory" : "HTML"
 	}
 	</script>
+
+	<style>
+			.left-box {
+				background: red;
+				float: left;
+			}
+			.right-box {
+				background: blue;
+				float: right;
+			}
+			</style>
+
+
 </head>
 <!-- End Head -->
 
@@ -74,10 +87,17 @@ START MODULE AREA 1: Menu 1
         </li>
         <li>
           <a href="My_page" data-theme="_bgp">나의 페이지</a>
-        </li>
+				</li>
+				<li><pre>									</pre></li>
+				<li>
+					<a><%= username %>님 환영합니다.</a>
+				</li>
+				<li>
+					<button id="logout_button" type="button" class="btn" onclick="location.href='/auth/logout'">로그아웃</button>
+				</li>
       </ul>
     </nav>
-  </div>
+	</div>
 </section>
 <!--
 END MODULE AREA 1: Menu 1
