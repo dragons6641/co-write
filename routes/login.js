@@ -47,6 +47,7 @@ router.get('/logout', function(req, res){
   delete req.session.user_id;
   delete req.session.id;
   delete req.session.username;
+  delete req.session.point;
   req.session.save(function(){
     res.send(`<script type="text/javascript"> alert("정상적으로 로그아웃 되었습니다."); location.href='/auth/login'; </script>`);
   });
