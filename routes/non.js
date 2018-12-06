@@ -21,7 +21,8 @@ router.get('/Main',function(req,res){
   if(req.session.user_id){
     user_id = req.session.user_id;
     username = req.session.username;
-    res.render('nonsul/Main', {username:username});
+    point = req.session.point;
+    res.render('nonsul/Main', {username:username, point:point});
   }
   else{
     res.redirect('/auth/login');
@@ -68,7 +69,7 @@ router.get('/Solve2_download', function(req,res){
 
 router.get('/Solve3',function(req,res){
   year = req.body.year;
-  var html = template.Solve3(prob_count, username);
+  var html = template.Solve3(prob_count, req.session.username,req.session.point);
   res.send(html);
 });
 
@@ -110,7 +111,7 @@ router.post('/Annotation2',function(req,res){
         console.log(err)
       }
       else{
-        var html = template.Annotation2(result2.length,result2, req.session.username);
+        var html = template.Annotation2(result2.length,result2, req.session.username,req.session.point);
         res.send(html);
       }
     })
@@ -153,7 +154,7 @@ router.get('/My_page',function(req,res){
       }
       leng1 = result1.length;
       leng2 = result2.length;
-      var html = template.My_page(leng1, leng2, result1, result2, username);
+      var html = template.My_page(leng1, leng2, result1, result2,  req.session.username,req.session.point);
       res.send(html); 
     });
   });
@@ -163,13 +164,12 @@ router.get('/My_page',function(req,res){
 
 router.post('/My_page2',function(req,res){
   index = Object.keys(req.body)[0]-1;
-  console.log(req.body);
-  console.log(index);
+
   if(index < leng1){
     db.query(`select * from essay_s inner join members on essay_s.user_id = members.user_id where problem_num = (SELECT problem_num FROM essay_p where school = '${req.body.school[index]}' and year = ${req.body.year[index]}) and essay_s.user_id = ${req.session.user_id};`,function(err,result1){
       db.query(`select * from essay_a inner join members on adviser_id = user_id where problem_num = ${result1[0].problem_num} and author_id = ${req.session.user_id};`,function(err,result2){
         temp_num = result1[0].problem_num;
-        var html = template.My_page2(result1.length, result2.length, result1, result2, username)
+        var html = template.My_page2(result1.length, result2.length, result1, result2,  req.session.username,req.session.point)
         res.send(html);
       });
     });
@@ -177,12 +177,35 @@ router.post('/My_page2',function(req,res){
     db.query(`select * from essay_a where problem_num = (SELECT problem_num FROM essay_p where school = '${req.body.school[index]}' and year = ${req.body.year[index]}) and adviser_id = ${req.session.user_id};`,function(err,result1){
       db.query(`select * from essay_s inner join members on essay_s.user_id = members.user_id where problem_num = ${result1[0].problem_num} and essay_s.user_id = ${result1[0].author_id};`,function(err,result2){
         db.query(`select * from essay_a inner join members on adviser_id = user_id where problem_num = ${result2[0].problem_num} and author_id = ${result2[0].user_id};`,function(err,result3){
+          console.log(result2);
+          console.log(result3);
           temp_num = result1[0].problem_num; 
-          var html = template.My_page2(result2.length, result3.length, result2, result3, username)
+          var html = template.My_page2(result2.length, result3.length, result2, result3,  req.session.username,req.session.point)
           res.send(html);
         }); 
       });
     });
   }
 });
+
+router.post('/My_page3',function(req,res){
+  console.log(req.body);
+  num = Object.keys(req.body)[0];
+    db.query(`select * from essay_a where (problem_num, adviser_id, author_id) = (select problem_num, adviser_id, author_id from essay_a where advise_num = ${num});`, function(err,result1){
+      db.query(`select * from essay_s where (problem_num, user_id) = (${result1[0].problem_num}, ${result1[0].author_id})`, function(err,result2){
+        console.log(result1);
+        console.log(result2);
+      });
+    });
+  /*
+    db.query(`select * from essay_a inner join members on essay_s.user_id = members.user_id where problem_num = (SELECT problem_num FROM essay_p where school = '${req.body.school[index]}' and year = ${req.body.year[index]}) and essay_s.user_id = ${req.session.user_id};`,function(err,result1){
+      db.query(`select * from essay_a inner join members on adviser_id = user_id where problem_num = ${result1[0].problem_num} and author_id = ${req.session.user_id};`,function(err,result2){
+        temp_num = result1[0].problem_num;
+        var html = template.My_page2(result1.length, result2.length, result1, result2, username)
+        res.send(html);
+      });
+    });
+    */
+});
+
   module.exports = router
