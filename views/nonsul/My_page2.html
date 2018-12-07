@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Start Head -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>나의 페이지</title>
+
+	<link rel="stylesheet" href="assets/css/style.min.css">
+	<link rel="stylesheet" href="assets/css/modules.css">
+
+	<!-- Canonical URL usage -->
+	<link rel="canonical" href="https://aperitif.io/">
+
+	<!-- Facebook Open Graph -->
+	<meta property="og:url"                content="https://aperitif.io/" />
+	<meta property="og:title"              content="Aperitif | The web template generator" />
+	<meta property="og:description"        content="Aperitif is a rapid web template generation tool." />
+	<meta property="og:image"              content="https://aperitif.io/img/aperitif-facebook.png" />
+	<meta property="og:image:width"        content="1200" />
+	<meta property="og:image:height"       content="630" />
+
+	<!-- Twitter Cards -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@Aperitif">
+	<meta name="twitter:creator" content="@Aperitif">
+	<meta name="twitter:title" content="Aperitif - The web template generator">
+	<meta name="twitter:description" content="Aperitif is a rapid web template generation tool.">
+	<meta name="twitter:image" content="https://aperitif.io/img/aperitif-card.png">
+
+	<!-- Google Structured Data -->
+	<script type="application/ld+json">
+	{
+	"@context" : "http://schema.org",
+	"@type" : "SoftwareApplication",
+	"name" : "Aperitif",
+	"image" : "https://aperitif.io/img/aperitif-logo.svg",
+	"url" : "https://aperitif.io/",
+	"author" : {
+	  "@type" : "Person",
+	  "name" : "Octavector"
+	},
+	"datePublished" : "2017-MM-DD",
+	"applicationCategory" : "HTML"
+	}
+	</script>
+</head>
+<!-- End Head -->
+
+<body class="default">
+
+<!--
+START MODULE AREA 1: Menu 1
+-->
+	<section class="MOD_MENU" data-theme="_bgp">
+	  <div data-layout="_r" class="nopadding">
+	    <nav class="MOD_MENU_Nav">
+	      <p class="MOD_MENU_Title">Menu</p>
+	      <svg class="MOD_MENU_Button" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+	        <rect width="30" height="6"/>
+	        <rect y="24" width="30" height="6"/>
+	        <rect y="12" width="30" height="6"/>
+	      </svg>
+	      <ul class="AP_Menu_List">
+	        <li>
+	          <a href="Main" data-theme="_bgp">메인</a>
+	        </li>
+	        <li>
+	          <a href="Solve" data-theme="_bgp">풀기</a>
+	        </li>
+	        <li>
+	          <a href="Annotation" data-theme="_bgp">첨삭</a>
+	        </li>
+	        <li>
+	          <a href="My_page" data-theme="_bgp">나의 페이지</a>
+					</li>
+					<li><pre>									</pre></li>
+				<li>
+					<a>님 환영합니다.</a>
+				</li>
+				<li>
+					<button id="logout_button" type="button" class="btn" onclick="location.href='/auth/logout'">로그아웃</button>
+				</li>
+	      </ul>
+	    </nav>
+	  </div>
+	</section>
+<!--
+END MODULE AREA 1: Menu 1
+-->
+
+<!--
+  START MODULE AREA 2: Page Title 1
+-->
+<section>
+  <div data-layout="_r">
+    <div data-layout="al16">
+      <h1> 나의 페이지 </h1>
+    </div>
+  </div>
+</section>
+<!--
+  END MODULE AREA 2: Page Title 1
+-->
+
+<!--
+START MODULE AREA 3: Accordian 1
+-->
+<section>
+	<div data-layout="_r">
+		<div data-layout="al16">
+			<h4>문제 1번</h4>
+			<p>wow</p>
+		</div>
+			
+				<p><textarea style="resize:none;" readonly id='mytextarea' cols="200" rows ='10'></textarea></p>
+		</div>
+			<h3>1번 문항 첨삭</h3>
+			<p>hou</p>
+		</div>
+	</div>
+</section>
+<section class="MOD_ACCORDION1">
+  <div data-layout="_r">
+    <div data-layout="al16">
+      <div class="AP_accordion" role="tablist">
+        <div class="MOD_ACCORDION1_Intro">
+          <h3 data-theme="_bb2">아이디123의 풀이</h3>
+					<style scoped type="text/css">
+					
+					</style>
+          
+					<h4>문제 1번</h4>
+	        <p><textarea readonly id='mytextarea' cols="100" rows ='10'></textarea></p>
+				</div>
+			
+        <section>
+					<div data-layout="_r">
+						<div data-layout="al16">
+							<h4>문제 1번</h4>
+							<p>wow</p>
+						</div>
+							<div class="fixed_width">
+								<p><textarea readonly id='mytextarea' cols="200" rows ='10'></textarea></p>
+							</div>
+						</div>
+							<h3>1번 문항 첨삭</h3>
+							<p>hou</p>
+						</div>
+					</div>
+				</section>
+      </div>
+    </div>
+  </div>
+</section>
+<!--
+END MODULE AREA 3: Accordian 1
+-->
+
+<script src="assets/js/index.js"></script>
+<script>
+
+// document.getElementById 함수를 호출합니다.
+var myElem = document.getElementById('mytextarea');
+
+// value 속성을 특정 내용으로 변경합니다.
+myElem.value = '글쓰기 풀이 대학혁신과공유센터에서 성균관대학교 학생들이 성균핵심역량진단 및 학습경험 설문조사를 실시하고 있습니다.\n측정 결과를 토대로 더 나은 교육과정을 제공할 수 있는 발판으로 활용하고자 계획되었습니다.자신의 역량을 진단받고 개인의 강점과 약점을 파악할 수 있는 기회를 제공 받을 수 있으며, 적극적이고 성실한 답변을 통해 우리 학교의 교육 내용과 질을 향상 시킬 수 있습니다. 한걸음 더 나아간 성균관대학교의 미래를 그리신다면, 지금 바로 참여해주^^1. 진단 대상: 성균관대학교 2018년 1학기 학부재학생 1-4학년(2018년 2학기 복학생, 대학원생은 제외)\n2. 진단 기감: 2018. 10.04(목) ~2018. 11.23(금)\n3. 참여 방법:* 개인 PC를 통한 온라인 응시로 교내 GLS 접속 후 [신청/자격관리 ☞ 학습경험및성균핵심역량진단 메뉴] 선택 후, 성균핵심역량진단과 학습경험 두 가지 설문 조사 모두 응시* 한 번의 로그인으로 모든 문항을 평가해야 하는 것은 아니며, 중간저장 후 다시 로그인하여 계속 진행할 수 있습니다. 다만, 모든 문항에 답변을 하고 저장을 하셔야만 완료가 됩니다.* 서베이 몽키 링크: https://ko.surveymonkey.com/r/HDWMVPH (<- 클릭) 에 접속해서도 가능* 진단 시간: 각 20분 이내4. 진단 영역:* 성균핵심역량(SCCA) : 성균인이 갖추어야 하는 6대 핵심역량(소통, 인문, 리더, 학문, 글로벌, 창의)* 학습경험: 수업에서의 사고기능, 학습태도와 참여도, 수업 만족도, 교수와의 상호작용, 학습 스터디 및 자기계발 활동, 학생 간 교류 등5. 진단 혜택- 개인별 핵심역량 진단평가 결과 제공 v- ★★ 성균핵심역량진단(SCCA) , 학습경험 조사 모두 참여한 학생에게 우선 추첨하여 지급(각 검사별 5000원 * 600매) ★★. 관련 문의: 성균관대학교 대학교육혁신센터 petal87@skku.edu 02-740-1674';
+
+</script>
+</body>
+
+</html>
