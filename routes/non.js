@@ -201,26 +201,32 @@ router.post('/My_page2',function(req,res){
 });
 
 router.post('/My_page3',function(req,res){
-  db.query(`select point from  members where user_id = ${req.session.user_id}`,function(err,result0){
-    if (result0[0].point <= 0){
+  num = Object.keys(req.body)[0];
+  db.query(`select * from essay_a where (problem_num, adviser_id, author_id) = (select problem_num, adviser_id, author_id from essay_a where advise_num = ${num});`, function(err,result1){
+    db.query(`select point from  members where user_id = ${req.session.user_id}`,function(err,result0){
+    if(result1[0].adviser_id === req.session.user_id){
+      db.query(`select * from essay_s inner join members on essay_s.user_id = members.user_id where (problem_num, essay_s.user_id) = (${result1[0].problem_num}, ${result1[0].author_id})`, function(err,result2){
+        temp_num = result2[0].problem_num;
+        var html = template.My_page3(result2.length, result1.length, result2, result1, req.session.username,point)
+        res.send(html);
+        });
+    }
+    else if (result0[0].point <= 0){
       res.send(`<script type="text/javascript"> alert("포인트가 부족합니다."); history.go(-1); </script>`)
     }
     else{
-    db.query(`update members set point = ${result0[0].point}-1 where user_id = ${req.session.user_id}`, function(err,result){
-      num = Object.keys(req.body)[0];
-      db.query(`select * from essay_a where (problem_num, adviser_id, author_id) = (select problem_num, adviser_id, author_id from essay_a where advise_num = ${num});`, function(err,result1){
-      db.query(`select * from essay_s inner join members on essay_s.user_id = members.user_id where (problem_num, essay_s.user_id) = (${result1[0].problem_num}, ${result1[0].author_id})`, function(err,result2){
+      db.query(`update members set point = ${result0[0].point}-1 where user_id = ${req.session.user_id}`, function(err,result){
+      
+        db.query(`select * from essay_s inner join members on essay_s.user_id = members.user_id where (problem_num, essay_s.user_id) = (${result1[0].problem_num}, ${result1[0].author_id})`, function(err,result2){
         temp_num = result2[0].problem_num;
         point -= 1;
         var html = template.My_page3(result2.length, result1.length, result2, result1, req.session.username,point)
         res.send(html);
+        });
       });
+    }
     });
-    });
-  }
-});  
-  
-  
+  });
 });
 
   module.exports = router
