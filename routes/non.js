@@ -203,7 +203,7 @@ router.post('/My_page2',function(req,res){
 router.post('/My_page3',function(req,res){
   db.query(`select point from  members where user_id = ${req.session.user_id}`,function(err,result0){
     if (result0[0].point <= 0){
-      res.send(`<script type="text/javascript"> alert("포인트가 부족합니다."); history.go(-11); </script>`)
+      res.send(`<script type="text/javascript"> alert("포인트가 부족합니다."); history.go(-1); </script>`)
     }
     else{
     db.query(`update members set point = ${result0[0].point}-1 where user_id = ${req.session.user_id}`, function(err,result){
