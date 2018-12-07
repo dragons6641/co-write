@@ -15,14 +15,19 @@ var leng1;
 var leng2;
 var user_id = '';
 var username = '';
+var point;
       
 
 router.get('/Main',function(req,res){
   if(req.session.user_id){
-    user_id = req.session.user_id;
-    username = req.session.username;
-    point = req.session.point;
-    res.render('nonsul/Main', {username:username, point:point});
+    db.query(`select point from members where user_id = ${req.session.user_id}`,function(err,result3){
+      console.log(result3);
+      point = result3[0].point;
+        user_id = req.session.user_id;
+      username = req.session.username;
+      res.render('nonsul/Main', {username:username, point:point});
+    });
+    
   }
   else{
     res.redirect('/auth/login');
@@ -30,12 +35,12 @@ router.get('/Main',function(req,res){
 });
 
 router.get('/Solve',function(req,res){
-  res.render('nonsul/Solve', {username:username});
+  res.render('nonsul/Solve', {username:username,point:point});
 });
 
 router.post('/Solve2',function(req,res){
   name = req.body.uni;
-  res.render('nonsul/Solve2', {username:username});
+  res.render('nonsul/Solve2', {username:username, point:point});
 });
 
 router.post('/Solve2_process', function(req,res){
@@ -69,7 +74,7 @@ router.get('/Solve2_download', function(req,res){
 
 router.get('/Solve3',function(req,res){
   year = req.body.year;
-  var html = template.Solve3(prob_count, req.session.username,req.session.point);
+  var html = template.Solve3(prob_count, req.session.username,point);
   res.send(html);
 });
 
@@ -95,11 +100,11 @@ router.post('/Solve4',function(req,res){
     });
   }
   
-  res.render('nonsul/Solve4', {username:username})
+  res.render('nonsul/Solve4', {username:username, point:point})
 });
 
 router.get('/Annotation',function(req,res){
-  res.render('nonsul/Annotation', {username:username})
+  res.render('nonsul/Annotation', {username:username, point:point})
 });
 
 router.post('/Annotation2',function(req,res){
@@ -111,7 +116,7 @@ router.post('/Annotation2',function(req,res){
         console.log(err)
       }
       else{
-        var html = template.Annotation2(result2.length,result2, req.session.username,req.session.point);
+        var html = template.Annotation2(result2.length,result2, req.session.username,point);
         res.send(html);
       }
     })
@@ -140,8 +145,15 @@ router.post('/Annotation3',function(req,res){
 
     });
   }
-  res.render('nonsul/Annotation3', {username:username})  
-});
+    db.query(`select point from  members where user_id = ${req.session.user_id}`,function(err,result1){
+      db.query(`update members set point = ${result1[0].point}+1 where user_id = ${req.session.user_id}`, input, function(err,result2){
+    });
+  });  
+
+  
+  point += 1;
+  res.render('nonsul/Annotation3', {username:username, point:point})  
+})
 
 router.get('/My_page',function(req,res){
   db.query(`SELECT * FROM essay_p where problem_num in (select problem_num from essay_s where user_id = ${req.session.user_id} group by problem_num );`, function(err,result1){
@@ -154,7 +166,7 @@ router.get('/My_page',function(req,res){
       }
       leng1 = result1.length;
       leng2 = result2.length;
-      var html = template.My_page(leng1, leng2, result1, result2,  req.session.username,req.session.point);
+      var html = template.My_page(leng1, leng2, result1, result2,  req.session.username,point);
       res.send(html); 
     });
   });
@@ -169,7 +181,7 @@ router.post('/My_page2',function(req,res){
     db.query(`select * from essay_s inner join members on essay_s.user_id = members.user_id where problem_num = (SELECT problem_num FROM essay_p where school = '${req.body.school[index]}' and year = ${req.body.year[index]}) and essay_s.user_id = ${req.session.user_id};`,function(err,result1){
       db.query(`select * from essay_a inner join members on adviser_id = user_id where problem_num = ${result1[0].problem_num} and author_id = ${req.session.user_id};`,function(err,result2){
         temp_num = result1[0].problem_num;
-        var html = template.My_page2(result1.length, result2.length, result1, result2,  req.session.username,req.session.point)
+        var html = template.My_page2(result1.length, result2.length, result1, result2,  req.session.username,point)
         res.send(html);
       });
     });
@@ -180,7 +192,7 @@ router.post('/My_page2',function(req,res){
           console.log(result2);
           console.log(result3);
           temp_num = result1[0].problem_num; 
-          var html = template.My_page2(result2.length, result3.length, result2, result3,  req.session.username,req.session.point)
+          var html = template.My_page2(result2.length, result3.length, result2, result3,  req.session.username,point)
           res.send(html);
         }); 
       });
@@ -189,23 +201,26 @@ router.post('/My_page2',function(req,res){
 });
 
 router.post('/My_page3',function(req,res){
-  console.log(req.body);
-  num = Object.keys(req.body)[0];
-    db.query(`select * from essay_a where (problem_num, adviser_id, author_id) = (select problem_num, adviser_id, author_id from essay_a where advise_num = ${num});`, function(err,result1){
-      db.query(`select * from essay_s where (problem_num, user_id) = (${result1[0].problem_num}, ${result1[0].author_id})`, function(err,result2){
-        console.log(result1);
-        console.log(result2);
-      });
-    });
-  /*
-    db.query(`select * from essay_a inner join members on essay_s.user_id = members.user_id where problem_num = (SELECT problem_num FROM essay_p where school = '${req.body.school[index]}' and year = ${req.body.year[index]}) and essay_s.user_id = ${req.session.user_id};`,function(err,result1){
-      db.query(`select * from essay_a inner join members on adviser_id = user_id where problem_num = ${result1[0].problem_num} and author_id = ${req.session.user_id};`,function(err,result2){
-        temp_num = result1[0].problem_num;
-        var html = template.My_page2(result1.length, result2.length, result1, result2, username)
+  db.query(`select point from  members where user_id = ${req.session.user_id}`,function(err,result0){
+    if (result0[0].point <= 0){
+      res.send(`<script type="text/javascript"> alert("포인트가 부족합니다."); history.go(-11); </script>`)
+    }
+    else{
+    db.query(`update members set point = ${result0[0].point}-1 where user_id = ${req.session.user_id}`, function(err,result){
+      num = Object.keys(req.body)[0];
+      db.query(`select * from essay_a where (problem_num, adviser_id, author_id) = (select problem_num, adviser_id, author_id from essay_a where advise_num = ${num});`, function(err,result1){
+      db.query(`select * from essay_s inner join members on essay_s.user_id = members.user_id where (problem_num, essay_s.user_id) = (${result1[0].problem_num}, ${result1[0].author_id})`, function(err,result2){
+        temp_num = result2[0].problem_num;
+        point -= 1;
+        var html = template.My_page3(result2.length, result1.length, result2, result1, req.session.username,point)
         res.send(html);
       });
     });
-    */
+    });
+  }
+});  
+  
+  
 });
 
   module.exports = router
